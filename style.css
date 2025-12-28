@@ -551,8 +551,8 @@ body {
 .social-icon svg {
   width: 26px;
   height: 26px;
-  color: var(--primary-yellow);
-  filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.5));
+  color: var(--link-color, var(--primary-yellow));
+  filter: drop-shadow(0 0 3px var(--link-color, rgba(255, 215, 0, 0.5)));
   position: relative;
   z-index: 1;
   transition: all 0.3s ease;
