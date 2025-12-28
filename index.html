@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sosyal Medya Hub - Tüm bağlantılarımı keşfedin"
+    />
+    <title>Sercio - Sosyal Hub</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+
+    <div class="container">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <div class="profile-image">
+          <img
+            id="profileImage"
+            src=""
+            alt="Profile"
+            onerror="this.style.display='none'"
+          />
+          <div class="profile-ring"></div>
+        </div>
+        <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
+        <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
+      </div>
+
+      <!-- Social Links -->
+      <div class="social-links" id="socialLinks">
+        <!-- Links will be loaded dynamically -->
+      </div>
+
+      <!-- Active Platforms -->
+      <div class="active-section">
+        <h3 class="section-title">Aktif Platformlarımız</h3>
+        <div class="platform-grid" id="platformGrid">
+          <!-- Platforms will be loaded dynamically -->
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p id="footerText">İletişim: info@mokrr.com</p>
+      </footer>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
