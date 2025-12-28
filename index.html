@@ -17,43 +17,56 @@
     />
   </head>
   <body>
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Smoke/Mist Effect -->
+    <div class="smoke-container">
+      <div class="smoke smoke-1"></div>
+      <div class="smoke smoke-2"></div>
+      <div class="smoke smoke-3"></div>
+    </div>
+
     <!-- Background Animation -->
     <div class="background-animation"></div>
 
     <div class="container">
-      <!-- Profile Section -->
-      <div class="profile-section">
-        <div class="profile-image">
-          <img
-            id="profileImage"
-            src=""
-            alt="Profile"
-            onerror="this.style.display='none'"
-          />
-          <div class="profile-ring"></div>
+      <!-- Top Row: Profile + Links -->
+      <div class="top-row">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-image">
+            <img
+              id="profileImage"
+              src=""
+              alt="Profile"
+              onerror="this.style.display='none'"
+            />
+            <div class="profile-ring"></div>
+          </div>
+          <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
+          <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
         </div>
-        <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
-        <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
-      </div>
 
-      <!-- Social Links -->
-      <div class="social-links" id="socialLinks">
-        <!-- Links will be loaded dynamically -->
-      </div>
-
-      <!-- Active Platforms -->
-      <div class="active-section">
-        <h3 class="section-title">Aktif Platformlarımız</h3>
-        <div class="platform-grid" id="platformGrid">
-          <!-- Platforms will be loaded dynamically -->
+        <!-- Social Links -->
+        <div class="social-links" id="socialLinks">
+          <!-- Links will be loaded dynamically -->
         </div>
       </div>
 
-      <!-- Footer -->
-      <footer class="footer">
-        <p id="footerText">İletişim: info@mokrr.com</p>
-      </footer>
+      <!-- Bottom Row: Active Servers -->
+      <div class="servers-section">
+        <h3 class="section-title">🎮 Aktif Sunucularımız</h3>
+        <div class="servers-grid" id="serversGrid">
+          <!-- Servers will be loaded dynamically -->
+        </div>
+      </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p id="footerText">İletişim: info@mokrr.com</p>
+    </footer>
 
     <!-- Loading Spinner -->
     <div class="loading" id="loading">
