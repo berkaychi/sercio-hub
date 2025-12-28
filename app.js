@@ -77,6 +77,16 @@ const sampleData = {
   footer: {
     text: "İletişim: info@sercio.com",
   },
+  // Toplu EP Çekimi bilgileri
+  topluEP: {
+    active: true, // true = göster, false = gizle
+    serverName: "Reborn MT2",
+    serverUrl: "https://discord.gg/sercio", // Discord'a yönlendir
+    date: "Bugün",
+    time: "21:00",
+    description: "Toplu EP çekimine katılmak için Discord sunucumuza gel!",
+    buttonText: "Discord'a Katıl",
+  },
 };
 
 // DOM elementleri
@@ -272,6 +282,78 @@ function renderFooter(footer) {
   footerText.textContent = footer.text;
 }
 
+// Toplu EP render et
+function renderTopluEP(topluEP) {
+  const btn = document.getElementById("topluEpBtn");
+  const modalOverlay = document.getElementById("epModalOverlay");
+  const modalContent = document.getElementById("epModalContent");
+  const modalClose = document.getElementById("epModalClose");
+
+  if (!topluEP || !topluEP.active) {
+    if (btn) btn.style.display = "none";
+    return;
+  }
+
+  // Butonu göster
+  if (btn) btn.style.display = "flex";
+
+  // Modal içeriğini doldur
+  if (modalContent) {
+    modalContent.innerHTML = `
+      <div class="ep-info-row">
+        <span class="ep-label">📍 Sunucu</span>
+        <span class="ep-value">${topluEP.serverName}</span>
+      </div>
+      <div class="ep-info-row">
+        <span class="ep-label">📅 Tarih</span>
+        <span class="ep-value">${topluEP.date}</span>
+      </div>
+      <div class="ep-info-row">
+        <span class="ep-label">⏰ Saat</span>
+        <span class="ep-value">${topluEP.time}</span>
+      </div>
+      <p class="ep-description">${topluEP.description}</p>
+      <div class="ep-modal-actions">
+        <a href="${topluEP.serverUrl}" target="_blank" class="ep-btn-primary">${
+      topluEP.buttonText || "Discord'a Katıl"
+    }</a>
+        <button class="ep-btn-secondary" id="epCloseBtn">Kapat</button>
+      </div>
+    `;
+
+    // Kapat butonu event'i
+    const closeBtn = document.getElementById("epCloseBtn");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
+        modalOverlay.classList.remove("active");
+      });
+    }
+  }
+
+  // Buton tıklama - modal aç
+  if (btn && modalOverlay) {
+    btn.addEventListener("click", () => {
+      modalOverlay.classList.add("active");
+    });
+  }
+
+  // X butonu - modal kapat
+  if (modalClose && modalOverlay) {
+    modalClose.addEventListener("click", () => {
+      modalOverlay.classList.remove("active");
+    });
+  }
+
+  // Overlay'e tıklayınca kapat
+  if (modalOverlay) {
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove("active");
+      }
+    });
+  }
+}
+
 // Loading'i gizle
 function hideLoading() {
   setTimeout(() => {
@@ -330,6 +412,7 @@ async function initApp() {
     renderServers(data.activeServers || sampleData.activeServers);
     renderDiscordWidget(data.discord || sampleData.discord);
     renderFooter(data.footer);
+    renderTopluEP(data.topluEP || sampleData.topluEP);
 
     hideLoading();
   } catch (error) {
