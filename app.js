@@ -87,9 +87,6 @@ const sampleData = {
     inviteLink: "https://discord.gg/sercio", // Davet linkini buraya yaz
     banner: "logo2.jpeg", // Discord banner/kapak resmi
   },
-  footer: {
-    text: "İletişim: info@sercio.com",
-  },
   // Bonuslu EP Çekimi bilgileri
   topluEP: {
     active: true, // true = göster, false = gizle
@@ -225,7 +222,6 @@ const profileImage = document.getElementById("profileImage");
 const socialLinksContainer = document.getElementById("socialLinks");
 const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
-const footerText = document.getElementById("footerText");
 const loading = document.getElementById("loading");
 
 // Discord bölümünü render et - Discord Tarzı Kart
@@ -406,11 +402,6 @@ function renderServers(servers) {
   });
 }
 
-// Footer'ı render et
-function renderFooter(footer) {
-  footerText.textContent = footer.text;
-}
-
 // Toplu EP render et
 function renderTopluEP(topluEP) {
   const btn = document.getElementById("topluEpBtn");
@@ -495,7 +486,6 @@ async function initApp() {
     renderProfile(sampleData.profile);
     renderSocialLinks(sampleData.socialLinks);
     renderDiscordWidget(sampleData.discord);
-    renderFooter(sampleData.footer);
 
     // Dinamik veriler için loading göster
     if (USE_SHEETS) {
