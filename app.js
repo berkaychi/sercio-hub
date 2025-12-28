@@ -48,7 +48,7 @@ const sampleData = {
     },
     {
       name: "WhatsApp",
-      description: "İletişim kanalımız",
+      description: "Duyuru Kanalımız",
       url: "https://wa.me/905xxxxxxxxx",
       icon: "📱",
       order: 4,
@@ -57,19 +57,22 @@ const sampleData = {
   activeServers: [
     {
       name: "Azure2 MT2",
-      logo: "https://via.placeholder.com/80x80/ff6b00/ffffff?text=AZ",
+      logo: "", // Gerçek logo URL'i eklenecek
+      icon: "⚔️",
       url: "https://azure2mt2.com",
       status: "active",
     },
     {
       name: "Phoenix MT2",
-      logo: "https://via.placeholder.com/80x80/ff4500/ffffff?text=PH",
+      logo: "",
+      icon: "🔥",
       url: "https://phoenixmt2.com",
       status: "active",
     },
     {
       name: "Dragon MT2",
-      logo: "https://via.placeholder.com/80x80/ffd700/000000?text=DR",
+      logo: "",
+      icon: "🐉",
       url: "https://dragonmt2.com",
       status: "active",
     },
@@ -194,9 +197,19 @@ function renderServers(servers) {
     card.target = "_blank";
     card.rel = "noopener noreferrer";
 
+    // Logo varsa img, yoksa emoji göster
+    const logoContent = server.logo
+      ? `<img src="${server.logo}" alt="${
+          server.name
+        }" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+         <span class="server-icon" style="display:none;">${
+           server.icon || "🎮"
+         }</span>`
+      : `<span class="server-icon">${server.icon || "🎮"}</span>`;
+
     card.innerHTML = `
             <div class="server-logo">
-                <img src="${server.logo}" alt="${server.name}" onerror="this.src='https://via.placeholder.com/80x80/1a1a1a/ffd700?text=MT2'">
+                ${logoContent}
                 <div class="server-status ${server.status}"></div>
             </div>
             <div class="server-info">
