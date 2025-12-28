@@ -117,12 +117,10 @@ function parseCSV(csv) {
 
 async function loadDataFromSheets() {
   if (!USE_SHEETS) {
-    console.log("Sheets devre dışı, örnek veriler kullanılıyor");
     return null;
   }
 
   try {
-    console.log("Google Sheets'ten veriler çekiliyor...");
 
     const [videolarRes, sunucularRes, topluEPRes] = await Promise.all([
       fetch(SHEETS_CONFIG.videolar),
@@ -178,12 +176,6 @@ async function loadDataFromSheets() {
         return { ...link, url: youtubeChannel };
       }
       return link;
-    });
-
-    console.log("Sheets verileri yüklendi:", {
-      videoIds,
-      activeServers,
-      topluEP,
     });
 
     return {
@@ -467,7 +459,6 @@ async function initApp() {
         renderVideos(sheetsData.youtubeVideos);
         renderServers(sheetsData.activeServers);
         renderTopluEP(sheetsData.topluEP);
-        console.log("Sheets verileri uygulandı");
       } else {
         renderVideos(sampleData.youtubeVideos);
         renderServers(sampleData.activeServers);
