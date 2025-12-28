@@ -22,7 +22,7 @@ const sampleData = {
   profile: {
     name: "Sercio",
     bio: "Bizi Takip Edin",
-    image: "", // Boş bırakıldığında gizlenir
+    image: "logo.jpeg", // Logo eklendi
   },
   socialLinks: [
     {
@@ -33,51 +33,36 @@ const sampleData = {
       order: 1,
     },
     {
-      name: "Discord",
-      description: "Topluluğumuza katıl",
-      url: "https://discord.gg/mokrr",
-      icon: "💬",
-      order: 2,
-    },
-    {
-      name: "TikTok",
-      description: "Kısa videolar",
-      url: "https://tiktok.com/@mokrr",
-      icon: "🎵",
-      order: 3,
-    },
-    {
       name: "WhatsApp",
       description: "Duyuru Kanalımız",
       url: "https://wa.me/905xxxxxxxxx",
       icon: "📱",
-      order: 4,
+      order: 2,
     },
   ],
   activeServers: [
     {
-      name: "Azure2 MT2",
+      name: "Reborn MT2",
       logo: "", // Gerçek logo URL'i eklenecek
       icon: "⚔️",
-      url: "https://azure2mt2.com",
+      url: "https://reborn2.com",
       status: "active",
     },
     {
-      name: "Phoenix MT2",
+      name: "TruvaMT2",
       logo: "",
       icon: "🔥",
-      url: "https://phoenixmt2.com",
-      status: "active",
-    },
-    {
-      name: "Dragon MT2",
-      logo: "",
-      icon: "🐉",
-      url: "https://dragonmt2.com",
+      url: "https://web.truvamt2.com",
       status: "active",
     },
   ],
   youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"],
+  // Discord bilgileri - statik
+  discord: {
+    name: "Sercio Discord",
+    description: "Topluluğumuza katıl!",
+    inviteLink: "https://discord.gg/sercio", // Davet linkini buraya yaz
+  },
   footer: {
     text: "İletişim: info@sercio.com",
   },
@@ -92,6 +77,27 @@ const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
 const footerText = document.getElementById("footerText");
 const loading = document.getElementById("loading");
+
+// Discord bölümünü render et - Kare Kart Tasarımı
+function renderDiscordWidget(discord) {
+  const discordWidget = document.querySelector(".discord-widget");
+  if (!discordWidget) return;
+
+  const { name, description, inviteLink } = discord;
+
+  discordWidget.innerHTML = `
+    <div class="discord-card">
+      <div class="discord-icon">
+        <svg width="40" height="40" viewBox="0 0 71 55" fill="white">
+          <path d="M60.1 4.9A58.5 58.5 0 0 0 45.4.5a.2.2 0 0 0-.2.1 40.6 40.6 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.4 37.4 0 0 0 25.4.6a.2.2 0 0 0-.2-.1 58.4 58.4 0 0 0-14.7 4.4.2.2 0 0 0-.1.1A59.6 59.6 0 0 0 .3 43.8a.2.2 0 0 0 .1.2 58.9 58.9 0 0 0 17.7 8.9.2.2 0 0 0 .3-.1 42.1 42.1 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.8 38.8 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.9a.2.2 0 0 1 .2 0 42 42 0 0 0 35.8 0 .2.2 0 0 1 .2 0l1.1.9a.2.2 0 0 1 0 .4 36.4 36.4 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.2 47.2 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.7-8.9.2.2 0 0 0 .1-.2 59.1 59.1 0 0 0-10.2-38.8.2.2 0 0 0-.1-.1ZM23.7 35.9c-3.4 0-6.2-3.1-6.2-6.9s2.7-6.9 6.2-6.9 6.3 3.1 6.2 6.9c0 3.8-2.8 6.9-6.2 6.9Zm22.9 0c-3.4 0-6.2-3.1-6.2-6.9s2.7-6.9 6.2-6.9 6.3 3.1 6.2 6.9c0 3.8-2.7 6.9-6.2 6.9Z"/>
+        </svg>
+      </div>
+      <h4 class="discord-name">${name}</h4>
+      <p class="discord-desc">${description}</p>
+      <a href="${inviteLink}" target="_blank" class="discord-btn">Discord'a Katıl</a>
+    </div>
+  `;
+}
 
 // Profil bilgilerini render et
 function renderProfile(profile) {
@@ -197,9 +203,26 @@ function renderServers(servers) {
     card.target = "_blank";
     card.rel = "noopener noreferrer";
 
-    // Logo varsa img, yoksa emoji göster
+    // URL'den domain çıkar ve favicon al
+    let faviconUrl = "";
+    try {
+      const domain = new URL(server.url).hostname;
+      // Google Favicon API - en güvenilir yöntem
+      faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    } catch (e) {
+      console.warn("URL parse error:", server.url);
+    }
+
+    // Öncelik: 1. Manuel logo, 2. Favicon API, 3. Emoji
     const logoContent = server.logo
       ? `<img src="${server.logo}" alt="${
+          server.name
+        }" onerror="this.onerror=null; this.src='${faviconUrl}';">
+         <span class="server-icon" style="display:none;">${
+           server.icon || "🎮"
+         }</span>`
+      : faviconUrl
+      ? `<img src="${faviconUrl}" alt="${
           server.name
         }" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
          <span class="server-icon" style="display:none;">${
@@ -284,6 +307,7 @@ async function initApp() {
     renderSocialLinks(data.socialLinks);
     renderVideos(data.youtubeVideos || sampleData.youtubeVideos);
     renderServers(data.activeServers || sampleData.activeServers);
+    renderDiscordWidget(data.discord || sampleData.discord);
     renderFooter(data.footer);
 
     hideLoading();

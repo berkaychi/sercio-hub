@@ -87,62 +87,225 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 40px 60px 40px;
+  padding: 25px 30px 30px;
   position: relative;
   z-index: 1;
 }
 
-/* Main Content - Profile Left, Links+Servers Right */
+/* Main Content - 3 Column Layout (Equal Width) */
 .main-content {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 60px;
-  flex: 1;
+  gap: 25px;
 }
 
-/* Left Side - Profile (centered vertically) */
-.left-side {
-  flex: 0 0 300px;
+/* Column Base Style */
+.column {
+  flex: 1;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+/* Left Column - Discord */
+.discord-column {
+  animation: fadeInLeft 1s ease-out;
   justify-content: center;
 }
 
-/* Right Side - Links + Servers */
-.right-side {
-  flex: 1;
+/* Center Column - Profile + Links */
+.center-column {
   display: flex;
-  flex-direction: row;
-  gap: 40px;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeInUp 1s ease-out 0.2s both;
+}
+
+/* Right Column - Servers */
+.servers-column {
+  animation: fadeInRight 1s ease-out 0.4s both;
+  justify-content: center;
 }
 
 /* Social Links Wrapper */
 .social-links-wrapper {
-  flex: 1;
-  max-width: 400px;
-  animation: fadeInUp 1s ease-out 0.3s both;
+  width: 100%;
 }
 
 /* Servers Wrapper */
 .servers-wrapper {
-  flex: 0 0 auto;
-  animation: fadeInRight 1s ease-out 0.4s both;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Discord Wrapper */
+.discord-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.discord-widget {
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 280px;
+  transition: all 0.4s ease;
+}
+
+.discord-widget:hover {
+  border-color: #5865f2;
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.4), 0 0 40px rgba(88, 101, 242, 0.2);
+}
+
+.discord-widget iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  border: none;
+  border-radius: 14px;
+}
+
+/* Discord Placeholder */
+.discord-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 280px;
+  padding: 20px;
+  text-align: center;
+}
+
+.discord-placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.discord-placeholder h4 {
+  font-size: 1.2rem;
+  color: #5865f2;
+  margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(88, 101, 242, 0.5);
+}
+
+.discord-placeholder p {
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.discord-join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+  width: 100%;
+}
+
+.discord-join-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(88, 101, 242, 0.6),
+    0 8px 25px rgba(88, 101, 242, 0.4);
+}
+
+.discord-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Discord Card - Kare Tasarım */
+.discord-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 25px 20px;
+  height: 100%;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+.discord-card .discord-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+  margin-bottom: 5px;
+}
+
+.discord-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #5865f2;
+  margin: 0;
+}
+
+.discord-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.discord-btn {
+  display: inline-block;
+  padding: 10px 25px;
+  background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+}
+
+.discord-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(88, 101, 242, 0.5);
+  background: linear-gradient(135deg, #6b75f7 0%, #8299e8 100%);
 }
 
 /* ============ PROFILE SECTION ============ */
 .profile-section {
-  flex: 0 0 300px;
   text-align: center;
-  animation: fadeInLeft 1s ease-out;
 }
 
 .profile-image {
   position: relative;
-  width: 160px;
-  height: 160px;
-  margin: 0 auto 25px;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
 }
 
 .profile-image img {
@@ -205,12 +368,12 @@ body {
 }
 
 .profile-name {
-  font-size: 2.8rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--primary-yellow);
   text-shadow: var(--neon-shadow);
-  margin-bottom: 10px;
-  letter-spacing: 4px;
+  margin-bottom: 5px;
+  letter-spacing: 3px;
   animation: textGlow 2s ease-in-out infinite alternate;
 }
 
@@ -246,9 +409,9 @@ body {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 16px 24px;
-  margin-bottom: 14px;
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 10px;
   text-decoration: none;
   color: var(--text-primary);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -324,14 +487,14 @@ body {
 .social-link-content {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
   position: relative;
   z-index: 1;
 }
 
 .social-icon {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -340,8 +503,8 @@ body {
     var(--primary-yellow) 0%,
     var(--secondary-yellow) 100%
   );
-  border-radius: 12px;
-  font-size: 1.4rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
   flex-shrink: 0;
   box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
   transition: all 0.3s ease;
@@ -353,13 +516,13 @@ body {
 }
 
 .social-info h3 {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .social-info p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
@@ -379,9 +542,9 @@ body {
 
 /* ============ SECTION TITLE (used by servers) ============ */
 .section-title {
-  font-size: 1.3rem;
+  font-size: 1rem;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 12px;
   color: var(--primary-yellow);
   font-weight: 600;
   text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
@@ -393,26 +556,26 @@ body {
   animation: fadeInUp 1s ease-out 0.5s both;
   text-align: center;
   width: 100%;
-  margin-top: 40px;
-  padding-top: 30px;
+  margin-top: 20px;
+  padding-top: 15px;
   border-top: 1px solid var(--card-border);
 }
 
 .videos-grid {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .video-card {
   position: relative;
-  width: 240px;
+  width: 220px;
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 2px solid var(--card-border);
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   text-decoration: none;
   color: var(--text-primary);
@@ -449,8 +612,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: rgba(255, 0, 0, 0.9);
   border-radius: 50%;
   display: flex;
@@ -520,18 +683,18 @@ body {
 .servers-grid {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
 }
 
 .server-card {
   position: relative;
-  width: 180px;
+  width: 100%;
   background: var(--card-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 2px solid var(--card-border);
-  border-radius: 16px;
-  padding: 15px;
+  border-radius: 14px;
+  padding: 12px 15px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -571,8 +734,8 @@ body {
 
 .server-logo {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   flex-shrink: 0;
   z-index: 1;
 }
@@ -593,13 +756,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   background: linear-gradient(
     135deg,
     rgba(255, 107, 0, 0.2) 0%,
     rgba(255, 69, 0, 0.1) 100%
   );
-  border-radius: 12px;
+  border-radius: 10px;
   border: 2px solid rgba(255, 107, 0, 0.3);
   transition: all 0.4s ease;
 }
@@ -775,59 +938,82 @@ body {
 }
 
 /* ============ TABLET ============ */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .container {
-    padding: 30px 35px 40px;
+    padding: 30px 25px 40px;
   }
 
   .main-content {
-    gap: 40px;
-  }
-
-  .left-side {
-    flex: 0 0 240px;
-  }
-
-  .right-side {
-    flex-direction: column;
     gap: 30px;
   }
 
-  .profile-section {
-    flex: 0 0 auto;
+  .left-column {
+    flex: 0 0 240px;
   }
+
+  .middle-column {
+    max-width: 350px;
+  }
+
+  .right-column {
+    flex: 0 0 280px;
+  }
+
   .profile-image {
     width: 130px;
     height: 130px;
   }
   .profile-name {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
-  .social-links-wrapper {
-    max-width: 100%;
+  .discord-widget {
+    min-height: 350px;
   }
 
-  .servers-grid {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .server-card {
-    width: 160px;
+  .discord-widget iframe {
+    min-height: 350px;
   }
 
   .video-card {
     width: 200px;
   }
+}
 
-  .video-play-btn {
-    width: 50px;
-    height: 50px;
+/* ============ TABLET SMALL ============ */
+@media (max-width: 1000px) {
+  .main-content {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .video-play-btn span {
-    font-size: 1.2rem;
+  .column {
+    flex: 0 0 calc(50% - 15px);
+    min-width: 300px;
+  }
+
+  .center-column {
+    flex: 0 0 100%;
+    order: -1;
+  }
+
+  .discord-column {
+    order: 0;
+  }
+
+  .servers-column {
+    order: 1;
+  }
+
+  .servers-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .server-card {
+    flex: 0 0 calc(50% - 6px);
+    padding: 15px;
   }
 }
 
@@ -839,38 +1025,47 @@ body {
   }
 
   .container {
-    padding: 40px 20px 40px;
+    padding: 30px 15px 40px;
     min-height: auto;
   }
 
   .main-content {
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
     width: 100%;
   }
 
-  .left-side {
-    flex: none;
+  .column {
+    flex: none !important;
     width: 100%;
+    min-width: 100%;
   }
 
-  .right-side {
-    flex-direction: column;
-    gap: 30px;
-    width: 100%;
+  .center-column {
+    order: -1;
   }
 
   .social-links-wrapper {
     width: 100%;
-    max-width: 100%;
   }
 
   .servers-wrapper {
     width: 100%;
   }
 
+  .discord-wrapper {
+    width: 100%;
+  }
+
+  .discord-widget {
+    min-height: 350px;
+  }
+
+  .discord-widget iframe {
+    min-height: 350px;
+  }
+
   .profile-section {
-    flex: none;
     width: 100%;
   }
 
@@ -879,7 +1074,7 @@ body {
     height: 110px;
   }
   .profile-name {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
 
   .social-link {
@@ -899,26 +1094,28 @@ body {
   }
 
   .server-card {
-    width: 150px;
+    flex: 0 0 calc(50% - 6px);
+    min-width: 140px;
+    padding: 15px;
   }
 
   .server-logo {
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
   }
 
   .youtube-section {
     width: 100%;
-    margin-top: 30px;
+    margin-top: 25px;
   }
 
   .videos-grid {
-    gap: 15px;
+    gap: 12px;
   }
 
   .video-card {
-    width: calc(50% - 10px);
-    min-width: 150px;
+    width: calc(50% - 8px);
+    min-width: 140px;
   }
 
   .video-info {
@@ -930,31 +1127,44 @@ body {
   }
 
   .footer {
-    margin-top: 30px;
+    margin-top: 25px;
   }
 }
 
 /* ============ SMALL MOBILE ============ */
 @media (max-width: 400px) {
   .container {
-    padding: 30px 15px 40px;
+    padding: 25px 12px 30px;
   }
+
   .profile-name {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     letter-spacing: 2px;
   }
 
   .server-card {
-    width: 130px;
+    flex: 0 0 100%;
     padding: 12px;
   }
 
   .server-logo {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
   }
 
   .server-info h4 {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .discord-widget {
+    min-height: 300px;
+  }
+
+  .discord-widget iframe {
+    min-height: 300px;
+  }
+
+  .video-card {
+    width: 100%;
   }
 }
