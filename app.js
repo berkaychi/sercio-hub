@@ -336,7 +336,7 @@ function renderServers(servers) {
     let faviconUrl = "";
     try {
       const domain = new URL(server.url).hostname;
-      faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+      faviconUrl = `https://icons.duckduckgo.com/ip3/${domain}.ico`;
     } catch (e) {
       console.warn("URL parse error:", server.url);
     }
@@ -441,7 +441,6 @@ function renderTopluEP(topluEP) {
 function hideLoading() {
   loading.classList.add("hidden");
 }
-
 
 async function initApp() {
   try {
@@ -630,7 +629,6 @@ function initParticles() {
   init();
   animate();
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
