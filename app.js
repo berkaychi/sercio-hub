@@ -1,4 +1,3 @@
-// ============ GOOGLE SHEETS YAPILANDIRMASI ============
 const SHEETS_CONFIG = {
   videolar:
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEZFuyYVrvqWgRy1TBht1l8wIcvOlgnv4EHYEKRfWklLQ1z5ldS5pdP1uT8BOy6mOu2P7zwNEuCZpe/pub?gid=0&single=true&output=csv",
@@ -8,10 +7,8 @@ const SHEETS_CONFIG = {
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEZFuyYVrvqWgRy1TBht1l8wIcvOlgnv4EHYEKRfWklLQ1z5ldS5pdP1uT8BOy6mOu2P7zwNEuCZpe/pub?gid=1172641502&single=true&output=csv",
 };
 
-// Google Sheets kullanımı için true yapın
 const USE_SHEETS = true;
 
-// Loading placeholder verisi (Sheets yüklenene kadar gösterilir)
 const loadingData = {
   youtubeVideos: [],
   activeServers: [
@@ -22,12 +19,11 @@ const loadingData = {
   },
 };
 
-// Sample data (Firebase olmadan test için)
 const sampleData = {
   profile: {
     name: "Sercio",
     bio: "Bizi Takip Edin",
-    image: "logo.jpeg", // Logo eklendi
+    image: "logo.jpeg",
   },
   socialLinks: [
     {
@@ -66,7 +62,7 @@ const sampleData = {
   activeServers: [
     {
       name: "Reborn MT2",
-      logo: "", // Gerçek logo URL'i eklenecek
+      logo: "",
       icon: "⚔️",
       url: "https://reborn2.com",
       status: "active",
@@ -80,18 +76,16 @@ const sampleData = {
     },
   ],
   youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"],
-  // Discord bilgileri - statik
   discord: {
     name: "Sercio Discord",
     description: "Topluluğumuza katıl!",
-    inviteLink: "https://discord.gg/sercio", // Davet linkini buraya yaz
-    banner: "logo2.jpeg", // Discord banner/kapak resmi
+    inviteLink: "https://discord.gg/sercio",
+    banner: "logo2.jpeg",
   },
-  // Bonuslu EP Çekimi bilgileri
   topluEP: {
-    active: true, // true = göster, false = gizle
+    active: true,
     serverName: "Reborn MT2",
-    serverUrl: "https://discord.gg/sercio", // Discord'a yönlendir
+    serverUrl: "https://discord.gg/sercio",
     date: "Bugün",
     time: "21:00",
     description: "Bonuslu EP çekimine katılmak için Discord sunucumuza gel!",
@@ -99,12 +93,9 @@ const sampleData = {
   },
 };
 
-// ============ GOOGLE SHEETS PARSE FONKSİYONLARI ============
-// CSV'yi parse et
 function parseCSV(csv) {
   const lines = csv.trim().split("\n");
   return lines.map((line) => {
-    // Basit CSV parse (virgülle ayır, tırnak içindekileri koru)
     const result = [];
     let current = "";
     let inQuotes = false;
@@ -124,7 +115,6 @@ function parseCSV(csv) {
   });
 }
 
-// Sheets'ten veri çek
 async function loadDataFromSheets() {
   if (!USE_SHEETS) {
     console.log("Sheets devre dışı, örnek veriler kullanılıyor");
@@ -134,7 +124,6 @@ async function loadDataFromSheets() {
   try {
     console.log("Google Sheets'ten veriler çekiliyor...");
 
-    // Paralel fetch
     const [videolarRes, sunucularRes, topluEPRes] = await Promise.all([
       fetch(SHEETS_CONFIG.videolar),
       fetch(SHEETS_CONFIG.sunucular),
@@ -145,7 +134,6 @@ async function loadDataFromSheets() {
     const sunucularCSV = await sunucularRes.text();
     const topluEPCSV = await topluEPRes.text();
 
-    // Parse videolar (ilk satır = kanal, geri kalanı = video ID'leri)
     const videolarRows = parseCSV(videolarCSV);
     const youtubeChannel =
       videolarRows[0]?.[0] || sampleData.socialLinks[0].url;
@@ -154,7 +142,6 @@ async function loadDataFromSheets() {
       .map((row) => row[0])
       .filter((id) => id);
 
-    // Parse sunucular (başlık satırı var: name, url, status)
     const sunucularRows = parseCSV(sunucularCSV);
     const sunucularHeader = sunucularRows[0];
     const activeServers = sunucularRows
@@ -168,7 +155,6 @@ async function loadDataFromSheets() {
       }))
       .filter((s) => s.name && s.url);
 
-    // Parse TopluEP (key-value formatı)
     const topluEPRows = parseCSV(topluEPCSV);
     const topluEPData = {};
     topluEPRows.forEach((row) => {
@@ -187,7 +173,6 @@ async function loadDataFromSheets() {
       buttonText: topluEPData.buttonText || "Discord'a Katıl",
     };
 
-    // YouTube linkini sosyal medyada güncelle
     const socialLinks = sampleData.socialLinks.map((link) => {
       if (link.name === "YouTube") {
         return { ...link, url: youtubeChannel };
@@ -215,7 +200,6 @@ async function loadDataFromSheets() {
   }
 }
 
-// DOM elementleri
 const profileName = document.getElementById("profileName");
 const profileBio = document.getElementById("profileBio");
 const profileImage = document.getElementById("profileImage");
@@ -224,7 +208,6 @@ const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
 const loading = document.getElementById("loading");
 
-// Discord bölümünü render et - Discord Tarzı Kart
 function renderDiscordWidget(discord) {
   const discordWidget = document.querySelector(".discord-widget");
   if (!discordWidget) return;
@@ -250,7 +233,6 @@ function renderDiscordWidget(discord) {
   `;
 }
 
-// Profil bilgilerini render et
 function renderProfile(profile) {
   profileName.textContent = profile.name;
   profileBio.textContent = profile.bio;
@@ -260,11 +242,9 @@ function renderProfile(profile) {
   }
 }
 
-// Sosyal medya linklerini render et
 function renderSocialLinks(links) {
   socialLinksContainer.innerHTML = "";
 
-  // Order'a göre sırala
   const sortedLinks = [...links].sort(
     (a, b) => (a.order || 0) - (b.order || 0)
   );
@@ -276,7 +256,6 @@ function renderSocialLinks(links) {
     linkElement.target = "_blank";
     linkElement.rel = "noopener noreferrer";
 
-    // CSS değişkeni olarak renk ata
     if (link.color) {
       linkElement.style.setProperty("--link-color", link.color);
     }
@@ -296,7 +275,6 @@ function renderSocialLinks(links) {
   });
 }
 
-// YouTube video başlığını API'den çek
 async function fetchVideoTitle(videoId) {
   try {
     const response = await fetch(
@@ -310,7 +288,6 @@ async function fetchVideoTitle(videoId) {
   }
 }
 
-// YouTube videolarını render et
 async function renderVideos(videoIds) {
   videosGrid.innerHTML = "";
 
@@ -323,7 +300,6 @@ async function renderVideos(videoIds) {
 
     const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 
-    // Önce loading state ile göster
     card.innerHTML = `
             <div class="video-thumbnail">
                 <img src="${thumbnailUrl}" alt="Video">
@@ -338,7 +314,6 @@ async function renderVideos(videoIds) {
 
     videosGrid.appendChild(card);
 
-    // Başlığı async olarak çek ve güncelle
     fetchVideoTitle(videoId).then((title) => {
       const titleElement = card.querySelector(".video-title");
       if (titleElement) {
@@ -348,7 +323,6 @@ async function renderVideos(videoIds) {
   }
 }
 
-// Aktif sunucuları render et
 function renderServers(servers) {
   serversGrid.innerHTML = "";
 
@@ -359,17 +333,14 @@ function renderServers(servers) {
     card.target = "_blank";
     card.rel = "noopener noreferrer";
 
-    // URL'den domain çıkar ve favicon al
     let faviconUrl = "";
     try {
       const domain = new URL(server.url).hostname;
-      // Google Favicon API - en güvenilir yöntem
       faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
     } catch (e) {
       console.warn("URL parse error:", server.url);
     }
 
-    // Öncelik: 1. Manuel logo, 2. Favicon API, 3. Emoji
     const logoContent = server.logo
       ? `<img src="${server.logo}" alt="${
           server.name
@@ -402,7 +373,6 @@ function renderServers(servers) {
   });
 }
 
-// Toplu EP render et
 function renderTopluEP(topluEP) {
   const btn = document.getElementById("topluEpBtn");
   const modalOverlay = document.getElementById("epModalOverlay");
@@ -414,10 +384,8 @@ function renderTopluEP(topluEP) {
     return;
   }
 
-  // Butonu göster
   if (btn) btn.style.display = "flex";
 
-  // Modal içeriğini doldur
   if (modalContent) {
     modalContent.innerHTML = `
       <div class="ep-info-row">
@@ -441,7 +409,6 @@ function renderTopluEP(topluEP) {
       </div>
     `;
 
-    // Kapat butonu event'i
     const closeBtn = document.getElementById("epCloseBtn");
     if (closeBtn) {
       closeBtn.addEventListener("click", () => {
@@ -450,21 +417,18 @@ function renderTopluEP(topluEP) {
     }
   }
 
-  // Buton tıklama - modal aç
   if (btn && modalOverlay) {
     btn.addEventListener("click", () => {
       modalOverlay.classList.add("active");
     });
   }
 
-  // X butonu - modal kapat
   if (modalClose && modalOverlay) {
     modalClose.addEventListener("click", () => {
       modalOverlay.classList.remove("active");
     });
   }
 
-  // Overlay'e tıklayınca kapat
   if (modalOverlay) {
     modalOverlay.addEventListener("click", (e) => {
       if (e.target === modalOverlay) {
@@ -474,20 +438,17 @@ function renderTopluEP(topluEP) {
   }
 }
 
-// Loading'i gizle
 function hideLoading() {
   loading.classList.add("hidden");
 }
 
-// Uygulamayı başlat
+
 async function initApp() {
   try {
-    // 1. ÖNCE: Sabit veriler + loading placeholder (anında görünsün)
     renderProfile(sampleData.profile);
     renderSocialLinks(sampleData.socialLinks);
     renderDiscordWidget(sampleData.discord);
 
-    // Dinamik veriler için loading göster
     if (USE_SHEETS) {
       renderVideos(loadingData.youtubeVideos);
       renderServers(loadingData.activeServers);
@@ -498,21 +459,17 @@ async function initApp() {
       renderTopluEP(sampleData.topluEP);
     }
 
-    // Loading'i hemen kaldır
     hideLoading();
 
-    // 2. SONRA: Sheets'ten güncel veriyi çek
     if (USE_SHEETS) {
       const sheetsData = await loadDataFromSheets();
       if (sheetsData) {
-        // Gerçek verileri göster
         renderSocialLinks(sheetsData.socialLinks);
         renderVideos(sheetsData.youtubeVideos);
         renderServers(sheetsData.activeServers);
         renderTopluEP(sheetsData.topluEP);
         console.log("Sheets verileri uygulandı");
       } else {
-        // Sheets başarısız, sampleData kullan
         renderVideos(sampleData.youtubeVideos);
         renderServers(sampleData.activeServers);
         renderTopluEP(sampleData.topluEP);
@@ -527,7 +484,6 @@ async function initApp() {
   }
 }
 
-// ============ FIRE PARTICLES ANIMATION ============
 function initParticles() {
   const canvas = document.getElementById("particles-canvas");
   if (!canvas) return;
@@ -543,28 +499,25 @@ function initParticles() {
     canvas.height = window.innerHeight;
   }
 
-  // Ateş kıvılcımları - yukarı doğru hareket eden
   class Spark {
     constructor() {
       this.reset();
     }
 
     reset() {
-      // Ekranın alt kısmından başla
       this.x = Math.random() * canvas.width;
       this.y = canvas.height + 10;
       this.size = Math.random() * 2.5 + 0.5;
       this.speedX = (Math.random() - 0.5) * 1.5;
-      this.speedY = -(Math.random() * 2 + 1.5); // Yukarı doğru
+      this.speedY = -(Math.random() * 2 + 1.5);
       this.opacity = Math.random() * 0.8 + 0.2;
       this.life = Math.random() * 150 + 100;
       this.maxLife = this.life;
-      // Ateş renkleri: sarı, turuncu, kırmızı
       const colors = [
-        { r: 255, g: 215, b: 0 }, // Sarı
-        { r: 255, g: 170, b: 0 }, // Turuncu
-        { r: 255, g: 107, b: 0 }, // Koyu turuncu
-        { r: 255, g: 69, b: 0 }, // Kırmızımsı
+        { r: 255, g: 215, b: 0 },
+        { r: 255, g: 170, b: 0 },
+        { r: 255, g: 107, b: 0 },
+        { r: 255, g: 69, b: 0 },
       ];
       this.color = colors[Math.floor(Math.random() * colors.length)];
     }
@@ -584,13 +537,11 @@ function initParticles() {
     draw() {
       const { r, g, b } = this.color;
 
-      // Core
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${this.opacity})`;
       ctx.fill();
 
-      // Glow
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${this.opacity * 0.2})`;
@@ -598,7 +549,6 @@ function initParticles() {
     }
   }
 
-  // Yavaş hareket eden korlar - atmosfer için
   class Ember {
     constructor() {
       this.reset(true);
@@ -620,7 +570,6 @@ function initParticles() {
       this.y += this.speedY;
       this.pulse += this.pulseSpeed;
 
-      // Titreşim efekti
       const pulseOpacity = this.opacity + Math.sin(this.pulse) * 0.15;
 
       if (this.y < -20) {
@@ -631,13 +580,11 @@ function initParticles() {
     }
 
     draw(pulseOpacity) {
-      // Soft amber glow
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 180, 50, ${pulseOpacity})`;
       ctx.fill();
 
-      // Outer glow
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size * 4, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(255, 150, 0, ${pulseOpacity * 0.15})`;
@@ -652,7 +599,7 @@ function initParticles() {
 
     for (let i = 0; i < sparkCount; i++) {
       const spark = new Spark();
-      spark.y = Math.random() * canvas.height; // İlk başta dağıt
+      spark.y = Math.random() * canvas.height;
       spark.life = Math.random() * spark.maxLife;
       sparks.push(spark);
     }
@@ -665,13 +612,11 @@ function initParticles() {
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Embers (arka planda)
     embers.forEach((ember) => {
       const pulseOpacity = ember.update();
       ember.draw(pulseOpacity);
     });
 
-    // Sparks (ön planda)
     sparks.forEach((spark) => {
       spark.update();
       spark.draw();
@@ -686,7 +631,7 @@ function initParticles() {
   animate();
 }
 
-// Sayfa yüklendiğinde uygulamayı başlat
+
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
   initParticles();
