@@ -74,6 +74,7 @@ const sampleData = {
       status: "active",
     },
   ],
+  youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"],
   footer: {
     text: "İletişim: info@mokrr.com",
   },
@@ -85,6 +86,7 @@ const profileBio = document.getElementById("profileBio");
 const profileImage = document.getElementById("profileImage");
 const socialLinksContainer = document.getElementById("socialLinks");
 const serversGrid = document.getElementById("serversGrid");
+const videosGrid = document.getElementById("videosGrid");
 const footerText = document.getElementById("footerText");
 const loading = document.getElementById("loading");
 
@@ -127,6 +129,58 @@ function renderSocialLinks(links) {
 
     socialLinksContainer.appendChild(linkElement);
   });
+}
+
+// YouTube video başlığını API'den çek
+async function fetchVideoTitle(videoId) {
+  try {
+    const response = await fetch(
+      `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`
+    );
+    const data = await response.json();
+    return data.title || "Video";
+  } catch (error) {
+    console.error("Video başlığı alınamadı:", error);
+    return "Video";
+  }
+}
+
+// YouTube videolarını render et
+async function renderVideos(videoIds) {
+  videosGrid.innerHTML = "";
+
+  for (const videoId of videoIds) {
+    const card = document.createElement("a");
+    card.href = `https://www.youtube.com/watch?v=${videoId}`;
+    card.className = "video-card";
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+
+    // Önce loading state ile göster
+    card.innerHTML = `
+            <div class="video-thumbnail">
+                <img src="${thumbnailUrl}" alt="Video">
+                <div class="video-play-btn">
+                    <span>▶</span>
+                </div>
+            </div>
+            <div class="video-info">
+                <h4 class="video-title" data-video-id="${videoId}">Yükleniyor...</h4>
+            </div>
+        `;
+
+    videosGrid.appendChild(card);
+
+    // Başlığı async olarak çek ve güncelle
+    fetchVideoTitle(videoId).then((title) => {
+      const titleElement = card.querySelector(".video-title");
+      if (titleElement) {
+        titleElement.textContent = title;
+      }
+    });
+  }
 }
 
 // Aktif sunucuları render et
@@ -215,6 +269,7 @@ async function initApp() {
 
     renderProfile(data.profile);
     renderSocialLinks(data.socialLinks);
+    renderVideos(data.youtubeVideos || sampleData.youtubeVideos);
     renderServers(data.activeServers || sampleData.activeServers);
     renderFooter(data.footer);
 
