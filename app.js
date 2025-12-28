@@ -79,7 +79,7 @@ const sampleData = {
   ],
   youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"],
   footer: {
-    text: "İletişim: info@mokrr.com",
+    text: "İletişim: info@sercio.com",
   },
 };
 
