@@ -91,10 +91,6 @@ const sampleData = {
     description: "Bonuslu EP çekimine katılmak için Discord sunucumuza gel!",
     buttonText: "Discord'a Katıl",
   },
-  yeniKanal: {
-    active: false,
-    message: "Yeni kanal açıldı! Abone olmayı unutma!",
-  },
 };
 
 function parseCSV(csv) {
@@ -136,11 +132,8 @@ async function loadDataFromSheets() {
     const topluEPCSV = await topluEPRes.text();
 
     const videolarRows = parseCSV(videolarCSV);
-    const firstRow = videolarRows[0] || [];
-    const youtubeChannel = firstRow[0] || sampleData.socialLinks[0].url;
-    const yeniKanalActive = firstRow[1]?.toLowerCase() === "true";
-    const yeniKanalMessage = firstRow[2] || "Yeni kanal açıldı! Abone olmayı unutma!";
-    
+    const youtubeChannel =
+      videolarRows[0]?.[0] || sampleData.socialLinks[0].url;
     const videoIds = videolarRows
       .slice(1)
       .map((row) => row[0])
@@ -184,12 +177,6 @@ async function loadDataFromSheets() {
       return link;
     });
 
-    const yeniKanal = {
-      active: yeniKanalActive,
-      message: yeniKanalMessage,
-      url: youtubeChannel,
-    };
-
     return {
       ...sampleData,
       socialLinks,
@@ -197,7 +184,6 @@ async function loadDataFromSheets() {
       activeServers:
         activeServers.length > 0 ? activeServers : sampleData.activeServers,
       topluEP: topluEP.serverName ? topluEP : sampleData.topluEP,
-      yeniKanal,
     };
   } catch (error) {
     console.error("Sheets verisi çekilirken hata:", error);
@@ -458,28 +444,6 @@ function renderTopluEP(topluEP) {
   }
 }
 
-function renderYeniKanal(yeniKanal) {
-  const banner = document.getElementById("newChannelBanner");
-  const link = document.getElementById("newChannelLink");
-  const closeBtn = document.getElementById("bannerClose");
-  const textEl = banner?.querySelector(".banner-text");
-
-  if (!banner || !yeniKanal || !yeniKanal.active) {
-    if (banner) banner.style.display = "none";
-    return;
-  }
-
-  banner.style.display = "flex";
-  if (textEl) textEl.textContent = yeniKanal.message;
-  if (link) link.href = yeniKanal.url;
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      banner.style.display = "none";
-    });
-  }
-}
-
 function hideLoading() {
   loading.classList.add("hidden");
 }
@@ -509,12 +473,10 @@ async function initApp() {
         renderVideos(sheetsData.youtubeVideos);
         renderServers(sheetsData.activeServers);
         renderTopluEP(sheetsData.topluEP);
-        renderYeniKanal(sheetsData.yeniKanal);
       } else {
         renderVideos(sampleData.youtubeVideos);
         renderServers(sampleData.activeServers);
         renderTopluEP(sampleData.topluEP);
-        renderYeniKanal(sampleData.yeniKanal);
       }
     }
   } catch (error) {
@@ -522,7 +484,6 @@ async function initApp() {
     renderVideos(sampleData.youtubeVideos);
     renderServers(sampleData.activeServers);
     renderTopluEP(sampleData.topluEP);
-    renderYeniKanal(sampleData.yeniKanal);
     hideLoading();
   }
 }
