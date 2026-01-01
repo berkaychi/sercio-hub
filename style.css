@@ -1537,3 +1537,181 @@ body {
     flex-direction: column;
   }
 }
+
+/* ============ BONUSLU EP PANEL (Inline - DC bölümünde) ============ */
+.bonuslu-ep-panel {
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(20, 20, 20, 0.95));
+  border: 2px solid var(--primary-yellow);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 215, 0, 0.1);
+  animation: epPanelGlow 3s ease-in-out infinite;
+}
+
+@keyframes epPanelGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 0 0 40px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.2);
+  }
+}
+
+.ep-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.ep-panel-icon {
+  font-size: 1.5rem;
+  animation: fireFlicker 0.5s ease-in-out infinite alternate;
+}
+
+.ep-panel-header h4 {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-yellow);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.ep-live-badge {
+  background: linear-gradient(135deg, #00ff00, #00cc00);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  animation: livePulse 1s ease-in-out infinite;
+}
+
+.ep-panel-content .ep-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.ep-panel-content .ep-label {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.ep-panel-content .ep-value {
+  color: var(--primary-yellow);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.ep-panel-content .ep-description {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.85rem;
+  margin: 15px 0;
+  padding: 12px;
+  background: rgba(255, 215, 0, 0.08);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-yellow);
+}
+
+.ep-panel-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 170, 0, 0.9));
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.ep-panel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
+}
+
+/* ============ DUYURULAR PANELİ ============ */
+.duyurular-panel {
+  margin-top: 20px;
+}
+
+.duyurular-list {
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.duyuru-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.duyuru-item:last-child {
+  border-bottom: none;
+}
+
+.duyuru-item:hover {
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.duyuru-tarih {
+  flex-shrink: 0;
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--primary-yellow);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.duyuru-mesaj {
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Mobile responsive for new panels */
+@media (max-width: 768px) {
+  .bonuslu-ep-panel {
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .ep-panel-header h4 {
+    font-size: 0.9rem;
+  }
+
+  .duyuru-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .duyuru-tarih {
+    align-self: flex-start;
+  }
+}
