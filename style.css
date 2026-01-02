@@ -139,9 +139,11 @@ body {
 }
 
 /* Discord Wrapper */
-.discord-wrapper {
+.discord-wrapper,
+.discord-widget-wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .discord-widget {
@@ -151,7 +153,7 @@ body {
   border: 2px solid var(--card-border);
   border-radius: 16px;
   overflow: hidden;
-  min-height: 280px;
+  min-height: 400px;
   transition: all 0.4s ease;
 }
 
@@ -162,10 +164,205 @@ body {
 
 .discord-widget iframe {
   width: 100%;
-  height: 100%;
-  min-height: 280px;
+  height: 400px;
   border: none;
   border-radius: 14px;
+}
+
+/* Mini Discord Widget (Bağlantıların altında) - Custom */
+.discord-mini-widget {
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  background: #2b2d31;
+  transition: all 0.3s ease;
+}
+
+.discord-mini-widget:hover {
+  border-color: #5865f2;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
+}
+
+/* Discord Widget Header */
+.discord-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: #1e1f22;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.discord-widget-icon {
+  width: 40px;
+  height: 40px;
+  background: #5865f2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discord-widget-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.discord-widget-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 2px 0;
+}
+
+.discord-online {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #b5bac1;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+  background: #23a559;
+  border-radius: 50%;
+}
+
+/* Discord Channels */
+.discord-channels {
+  padding: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.discord-channel {
+  margin-bottom: 4px;
+}
+
+.channel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: #949ba4;
+  font-size: 0.85rem;
+}
+
+.channel-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #dbdee1;
+}
+
+.channel-icon {
+  font-size: 1rem;
+}
+
+.channel-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.channel-count {
+  background: rgba(88, 101, 242, 0.3);
+  color: #5865f2;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Channel Members */
+.channel-members {
+  margin-left: 20px;
+  padding: 4px 0;
+}
+
+.channel-member {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.channel-member:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.member-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.member-name {
+  font-size: 0.8rem;
+  color: #dbdee1;
+}
+
+/* Discord Members List (when no voice channels) */
+.discord-members-list {
+  padding: 8px;
+}
+
+.discord-member {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.discord-member:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.member-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+.member-status.online {
+  background: #23a559;
+}
+.member-status.idle {
+  background: #f0b232;
+}
+.member-status.dnd {
+  background: #f23f43;
+}
+
+.no-members {
+  text-align: center;
+  color: #949ba4;
+  font-size: 0.85rem;
+  padding: 20px;
+}
+
+/* Discord Join Button */
+.discord-mini-widget .discord-join-btn {
+  display: block;
+  margin: 8px;
+  padding: 10px;
+  background: #248046;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.discord-mini-widget .discord-join-btn:hover {
+  background: #1a6334;
 }
 
 /* Discord Placeholder */
@@ -1540,7 +1737,11 @@ body {
 
 /* ============ BONUSLU EP PANEL (Inline - DC bölümünde) ============ */
 .bonuslu-ep-panel {
-  background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(20, 20, 20, 0.95));
+  background: linear-gradient(
+    145deg,
+    rgba(255, 215, 0, 0.1),
+    rgba(20, 20, 20, 0.95)
+  );
   border: 2px solid var(--primary-yellow);
   border-radius: 16px;
   padding: 20px;
@@ -1550,7 +1751,8 @@ body {
 }
 
 @keyframes epPanelGlow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 0 0 40px rgba(255, 215, 0, 0.1);
   }
   50% {
@@ -1629,7 +1831,11 @@ body {
   display: block;
   width: 100%;
   padding: 12px 20px;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.9), rgba(255, 170, 0, 0.9));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 215, 0, 0.9),
+    rgba(255, 170, 0, 0.9)
+  );
   border: none;
   border-radius: 10px;
   color: #000;

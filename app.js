@@ -6,7 +6,7 @@ const SHEETS_CONFIG = {
   topluEP:
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEZFuyYVrvqWgRy1TBht1l8wIcvOlgnv4EHYEKRfWklLQ1z5ldS5pdP1uT8BOy6mOu2P7zwNEuCZpe/pub?gid=1172641502&single=true&output=csv",
   duyurular:
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEZFuyYVrvqWgRy1TBht1l8wIcvOlgnv4EHYEKRfWklLQ1z5ldS5pdP1uT8BOy6mOu2P7zwNEuCZpe/pub?gid=DUYURULAR_GID&single=true&output=csv",
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vSEZFuyYVrvqWgRy1TBht1l8wIcvOlgnv4EHYEKRfWklLQ1z5ldS5pdP1uT8BOy6mOu2P7zwNEuCZpe/pub?gid=1023942678&single=true&output=csv",
 };
 
 const USE_SHEETS = true;
@@ -71,12 +71,6 @@ const sampleData = {
     },
   ],
   youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"],
-  discord: {
-    name: "Sercio Discord",
-    description: "Topluluğumuza katıl!",
-    inviteLink: "https://discord.gg/sercio",
-    banner: "logo2.jpeg",
-  },
   topluEP: {
     active: true,
     serverName: "Reborn MT2",
@@ -120,12 +114,13 @@ async function loadDataFromSheets() {
   }
 
   try {
-    const [videolarRes, sunucularRes, topluEPRes, duyurularRes] = await Promise.all([
-      fetch(SHEETS_CONFIG.videolar),
-      fetch(SHEETS_CONFIG.sunucular),
-      fetch(SHEETS_CONFIG.topluEP),
-      fetch(SHEETS_CONFIG.duyurular).catch(() => null),
-    ]);
+    const [videolarRes, sunucularRes, topluEPRes, duyurularRes] =
+      await Promise.all([
+        fetch(SHEETS_CONFIG.videolar),
+        fetch(SHEETS_CONFIG.sunucular),
+        fetch(SHEETS_CONFIG.topluEP),
+        fetch(SHEETS_CONFIG.duyurular).catch(() => null),
+      ]);
 
     const videolarCSV = await videolarRes.text();
     const sunucularCSV = await sunucularRes.text();
@@ -175,8 +170,13 @@ async function loadDataFromSheets() {
     let duyurular = [];
     if (duyurularCSV) {
       const duyurularRows = parseCSV(duyurularCSV);
-      duyurular = duyurularRows
-        .slice(1)
+      // İlk satır header mı kontrol et (tarih formatı yoksa header'dır)
+      const firstRow = duyurularRows[0];
+      const hasHeader =
+        firstRow && firstRow[0] && !firstRow[0].match(/^\d{2}\.\d{2}\.\d{4}$/);
+
+      const dataRows = hasHeader ? duyurularRows.slice(1) : duyurularRows;
+      duyurular = dataRows
         .map((row) => ({
           tarih: row[0] || "",
           mesaj: row[1] || "",
@@ -213,31 +213,6 @@ const socialLinksContainer = document.getElementById("socialLinks");
 const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
 const loading = document.getElementById("loading");
-
-function renderDiscordWidget(discord) {
-  const discordWidget = document.querySelector(".discord-widget");
-  if (!discordWidget) return;
-
-  const { name, description, inviteLink, banner } = discord;
-
-  discordWidget.innerHTML = `
-    <div class="discord-card">
-      <div class="discord-banner">
-        <img src="${banner || "logo.jpeg"}" alt="Discord Banner">
-      </div>
-      <div class="discord-content">
-        <div class="discord-icon">
-          <svg width="28" height="28" viewBox="0 0 71 55" fill="white">
-            <path d="M60.1 4.9A58.5 58.5 0 0 0 45.4.5a.2.2 0 0 0-.2.1 40.6 40.6 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.4 37.4 0 0 0 25.4.6a.2.2 0 0 0-.2-.1 58.4 58.4 0 0 0-14.7 4.4.2.2 0 0 0-.1.1A59.6 59.6 0 0 0 .3 43.8a.2.2 0 0 0 .1.2 58.9 58.9 0 0 0 17.7 8.9.2.2 0 0 0 .3-.1 42.1 42.1 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.8 38.8 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.9a.2.2 0 0 1 .2 0 42 42 0 0 0 35.8 0 .2.2 0 0 1 .2 0l1.1.9a.2.2 0 0 1 0 .4 36.4 36.4 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.2 47.2 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.7-8.9.2.2 0 0 0 .1-.2 59.1 59.1 0 0 0-10.2-38.8.2.2 0 0 0-.1-.1ZM23.7 35.9c-3.4 0-6.2-3.1-6.2-6.9s2.7-6.9 6.2-6.9 6.3 3.1 6.2 6.9c0 3.8-2.8 6.9-6.2 6.9Zm22.9 0c-3.4 0-6.2-3.1-6.2-6.9s2.7-6.9 6.2-6.9 6.3 3.1 6.2 6.9c0 3.8-2.7 6.9-6.2 6.9Z"/>
-          </svg>
-        </div>
-        <h4 class="discord-name">${name}</h4>
-        <p class="discord-desc">${description}</p>
-        <a href="${inviteLink}" target="_blank" class="discord-btn">Sunucuya Katıl</a>
-      </div>
-    </div>
-  `;
-}
 
 function renderProfile(profile) {
   profileName.textContent = profile.name;
@@ -438,6 +413,112 @@ function renderDuyurular(duyurular) {
     .join("");
 }
 
+// Discord Widget API
+const DISCORD_SERVER_ID = "1361399964055376103";
+
+async function renderDiscordWidget() {
+  const channelsContainer = document.getElementById("discordChannels");
+  const serverNameEl = document.getElementById("discordServerName");
+  const onlineCountEl = document.getElementById("onlineCount");
+
+  if (!channelsContainer) return;
+
+  try {
+    const response = await fetch(
+      `https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`
+    );
+
+    if (!response.ok) {
+      channelsContainer.innerHTML = `
+        <div class="discord-channel">
+          <span class="channel-icon">ℹ️</span>
+          <span class="channel-name">Widget etkin değil</span>
+        </div>
+      `;
+      return;
+    }
+
+    const data = await response.json();
+
+    // Sunucu adı ve online sayısı
+    if (serverNameEl) serverNameEl.textContent = data.name;
+    if (onlineCountEl) onlineCountEl.textContent = data.presence_count || 0;
+
+    // Ses kanalları ve üyeler
+    if (data.channels && data.channels.length > 0) {
+      let html = "";
+
+      data.channels.forEach((channel) => {
+        const membersInChannel =
+          data.members?.filter((m) => m.channel_id === channel.id) || [];
+
+        html += `
+          <div class="discord-channel">
+            <div class="channel-header">
+              <span class="channel-icon">🔊</span>
+              <span class="channel-name">${channel.name}</span>
+              ${
+                membersInChannel.length > 0
+                  ? `<span class="channel-count">${membersInChannel.length}</span>`
+                  : ""
+              }
+            </div>
+            ${
+              membersInChannel.length > 0
+                ? `
+              <div class="channel-members">
+                ${membersInChannel
+                  .map(
+                    (member) => `
+                  <div class="channel-member">
+                    <img src="${member.avatar_url}" alt="${member.username}" class="member-avatar">
+                    <span class="member-name">${member.username}</span>
+                  </div>
+                `
+                  )
+                  .join("")}
+              </div>
+            `
+                : ""
+            }
+          </div>
+        `;
+      });
+
+      channelsContainer.innerHTML = html;
+    } else {
+      // Ses kanalı yoksa sadece online üyeleri göster
+      channelsContainer.innerHTML = `
+        <div class="discord-members-list">
+          ${
+            data.members
+              ?.slice(0, 10)
+              .map(
+                (member) => `
+            <div class="discord-member">
+              <img src="${member.avatar_url}" alt="${member.username}" class="member-avatar">
+              <span class="member-name">${member.username}</span>
+              <span class="member-status ${member.status}"></span>
+            </div>
+          `
+              )
+              .join("") ||
+            '<div class="no-members">Şu an kimse çevrimiçi değil</div>'
+          }
+        </div>
+      `;
+    }
+  } catch (error) {
+    console.error("Discord widget yüklenemedi:", error);
+    channelsContainer.innerHTML = `
+      <div class="discord-channel">
+        <span class="channel-icon">⚠️</span>
+        <span class="channel-name">Yüklenemedi</span>
+      </div>
+    `;
+  }
+}
+
 function hideLoading() {
   loading.classList.add("hidden");
 }
@@ -446,7 +527,7 @@ async function initApp() {
   try {
     renderProfile(sampleData.profile);
     renderSocialLinks(sampleData.socialLinks);
-    renderDiscordWidget(sampleData.discord);
+    renderDiscordWidget(); // Discord widget'ı yükle
 
     if (USE_SHEETS) {
       renderVideos(loadingData.youtubeVideos);

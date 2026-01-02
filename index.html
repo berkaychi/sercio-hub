@@ -49,17 +49,14 @@
 
       <!-- Main Content Area - 3 Columns -->
       <div class="main-content">
-        <!-- Left Column - Discord Widget + Bonuslu EP + Duyurular -->
+        <!-- Left Column - Bonuslu EP + Duyurular -->
         <div class="column discord-column">
-          <div class="discord-wrapper">
-            <h3 class="section-title">💬 Discord Topluluğu</h3>
-            <div class="discord-widget">
-              <!-- Discord card will be loaded dynamically -->
-            </div>
-          </div>
-
           <!-- Bonuslu EP Panel (direkt görünür) -->
-          <div class="bonuslu-ep-panel" id="bonusluEpPanel" style="display: none;">
+          <div
+            class="bonuslu-ep-panel"
+            id="bonusluEpPanel"
+            style="display: none"
+          >
             <div class="ep-panel-header">
               <span class="ep-panel-icon">🔥</span>
               <h4>BONUSLU EP ÇEKİMİ</h4>
@@ -85,6 +82,35 @@
             <h3 class="section-title">🔗 Bağlantılar</h3>
             <div class="social-links" id="socialLinks">
               <!-- Links will be loaded dynamically -->
+            </div>
+            <!-- Mini Discord Widget (Bağlantıların altında) -->
+            <div class="discord-mini-widget" id="discordWidget">
+              <div class="discord-widget-header">
+                <div class="discord-widget-icon">
+                  <svg viewBox="0 0 71 55" fill="currentColor">
+                    <path
+                      d="M60.1 4.9A58.5 58.5 0 0 0 45.4.5a.2.2 0 0 0-.2.1 40.6 40.6 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.4 37.4 0 0 0 25.4.6a.2.2 0 0 0-.2-.1 58.4 58.4 0 0 0-14.7 4.4.2.2 0 0 0-.1.1A59.6 59.6 0 0 0 .3 43.8a.2.2 0 0 0 .1.2 58.9 58.9 0 0 0 17.7 8.9.2.2 0 0 0 .3-.1 42.1 42.1 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.8 38.8 0 0 1-5.5-2.6.2.2 0 0 1 0-.4l1.1-.9a.2.2 0 0 1 .2 0 42 42 0 0 0 35.8 0 .2.2 0 0 1 .2 0l1.1.9a.2.2 0 0 1 0 .4 36.4 36.4 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47.2 47.2 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.7-8.9.2.2 0 0 0 .1-.2 59.1 59.1 0 0 0-10.2-38.8.2.2 0 0 0-.1-.1ZM23.7 35.9c-3.4 0-6.2-3.1-6.2-6.9s2.7-6.9 6.2-6.9 6.3 3.1 6.2 6.9c0 3.8-2.8 6.9-6.2 6.9Zm22.9 0c-3.4 0-6.2-3.1-6.2-6.9s2.7-6.9 6.2-6.9 6.3 3.1 6.2 6.9c0 3.8-2.7 6.9-6.2 6.9Z"
+                    />
+                  </svg>
+                </div>
+                <div class="discord-widget-info">
+                  <h4 id="discordServerName">Sercio Discord</h4>
+                  <span class="discord-online" id="discordOnline">
+                    <span class="online-dot"></span>
+                    <span id="onlineCount">0</span> Çevrimiçi
+                  </span>
+                </div>
+              </div>
+              <div class="discord-channels" id="discordChannels">
+                <!-- Ses kanalları buraya yüklenecek -->
+              </div>
+              <a
+                href="https://discord.gg/sercio"
+                target="_blank"
+                class="discord-join-btn"
+              >
+                Sunucuya Katıl
+              </a>
             </div>
           </div>
         </div>
