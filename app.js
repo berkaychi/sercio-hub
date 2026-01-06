@@ -32,7 +32,7 @@ const sampleData = {
     {
       name: "YouTube",
       description: "",
-      url: "https://www.youtube.com/@Sercio-x3s",
+      url: "https://www.youtube.com/@Sercio-m4d",
       icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
       color: "#FF0000",
       order: 1,
@@ -40,7 +40,7 @@ const sampleData = {
     {
       name: "Instagram",
       description: "",
-      url: "https://www.instagram.com/saborfx",
+      url: "https://www.instagram.com/sserciio?igsh=MWduaGFoN3JidTJsag%3D%3D&utm_source=qr",
       icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>',
       color: "#E4405F",
       order: 2,
@@ -48,7 +48,7 @@ const sampleData = {
     {
       name: "Facebook",
       description: "",
-      url: "https://www.facebook.com/AdaletininPencworlds",
+      url: "https://www.facebook.com/profile.php?id=61584788655501",
       icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>',
       color: "#1877F2",
       order: 3,
@@ -89,8 +89,32 @@ const sampleData = {
     buttonText: "Discord'a Katıl",
   },
   duyurular: [
-    { tarih: "02.01.2026", mesaj: "Telif yedik, yeni kanal açıldı!" },
-    { tarih: "01.01.2026", mesaj: "Toplu EP alımları 21:00'de aktif!" },
+    {
+      tarih: "06.01.2026",
+      mesaj: "Canlı yayın başlıyor!",
+      tip: "yayin",
+      link: "https://youtube.com/@Sercio-x3s/live",
+      saat: "21:00",
+    },
+    {
+      tarih: "06.01.2026",
+      mesaj: "Yeni kanal açıldı!",
+      tip: "link",
+      link: "https://www.youtube.com/@Sercio-x3s",
+    },
+    {
+      tarih: "05.01.2026",
+      mesaj: "Toplu EP çekimi var!",
+      tip: "etkinlik",
+      link: "https://discord.gg/sercio",
+      saat: "22:00",
+    },
+    {
+      tarih: "04.01.2026",
+      mesaj: "Site güncellendi, yeni tasarım!",
+      tip: "normal",
+    },
+    { tarih: "03.01.2026", mesaj: "Acil: Sunucu bakımda!", tip: "onemli" },
   ],
 };
 
@@ -174,7 +198,7 @@ async function loadDataFromSheets() {
       buttonText: topluEPData.buttonText || "Discord'a Katıl",
     };
 
-    // Duyurular parse
+    // Duyurular parse (yeni format: tarih, mesaj, tip, link, saat)
     let duyurular = [];
     if (duyurularCSV) {
       const duyurularRows = parseCSV(duyurularCSV);
@@ -185,10 +209,20 @@ async function loadDataFromSheets() {
 
       const dataRows = hasHeader ? duyurularRows.slice(1) : duyurularRows;
       duyurular = dataRows
-        .map((row) => ({
-          tarih: row[0] || "",
-          mesaj: row[1] || "",
-        }))
+        .map((row) => {
+          let link = row[3] || "";
+          // URL'nin başında http:// veya https:// yoksa ekle
+          if (link && !link.match(/^https?:\/\//i)) {
+            link = "https://" + link;
+          }
+          return {
+            tarih: row[0] || "",
+            mesaj: row[1] || "",
+            tip: row[2] || "normal",
+            link: link,
+            saat: row[4] || "",
+          };
+        })
         .filter((d) => d.tarih && d.mesaj);
     }
 
@@ -436,15 +470,57 @@ function renderDuyurular(duyurular) {
   }
 
   duyurularList.innerHTML = duyurular
-    .map(
-      (d) => `
-      <div class="duyuru-item">
-        <span class="duyuru-tarih">${d.tarih}</span>
-        <span class="duyuru-mesaj">${d.mesaj}</span>
-      </div>
-    `
-    )
+    .map((d) => {
+      const tip = d.tip || "normal";
+      const tipConfig = getDuyuruTipConfig(tip);
+
+      // Saat bilgisi varsa mesaja ekle
+      let mesajText = d.mesaj;
+      if (d.saat) {
+        mesajText += ` <span class="duyuru-saat">⏰ ${d.saat}</span>`;
+      }
+
+      // Link butonu
+      let linkButton = "";
+      if (d.link) {
+        linkButton = `<a href="${d.link}" target="_blank" class="duyuru-link-btn ${tip}">${tipConfig.buttonText}</a>`;
+      }
+
+      return `
+        <div class="duyuru-item ${tip}">
+          <div class="duyuru-left">
+            <span class="duyuru-tip-badge ${tip}">${tipConfig.badge}</span>
+            <span class="duyuru-tarih">${formatDuyuruTarih(d.tarih)}</span>
+          </div>
+          <div class="duyuru-content">
+            <span class="duyuru-mesaj">${mesajText}</span>
+            ${linkButton}
+          </div>
+        </div>
+      `;
+    })
     .join("");
+}
+
+// Duyuru tipi konfigürasyonları
+function getDuyuruTipConfig(tip) {
+  const configs = {
+    normal: { badge: "📢", buttonText: "" },
+    link: { badge: "🔗 YENİ", buttonText: "Git →" },
+    yayin: { badge: "🔴 CANLI", buttonText: "İzle →" },
+    onemli: { badge: "⚠️ ÖNEMLİ", buttonText: "" },
+  };
+  return configs[tip] || configs.normal;
+}
+
+// Tarih formatını kısalt (06.01.2026 -> 06.01)
+function formatDuyuruTarih(tarih) {
+  if (!tarih) return "-";
+  const parts = tarih.split(".");
+  if (parts.length >= 2) {
+    return `${parts[0]}.${parts[1]}`;
+  }
+  return tarih;
 }
 
 function hideLoading() {

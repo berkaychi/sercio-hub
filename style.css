@@ -103,6 +103,8 @@ body {
 /* Column Base Style */
 .column {
   flex: 1;
+  min-width: 0;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
 }
@@ -1746,6 +1748,8 @@ body {
   border-radius: 16px;
   padding: 20px;
   margin-top: 20px;
+  width: 100%;
+  box-sizing: border-box;
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 215, 0, 0.1);
   animation: epPanelGlow 3s ease-in-out infinite;
 }
@@ -1929,7 +1933,7 @@ body {
 
 .duyuru-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   padding: 14px 16px;
   border-bottom: 1px solid rgba(255, 215, 0, 0.1);
@@ -1944,21 +1948,146 @@ body {
   background: rgba(255, 215, 0, 0.05);
 }
 
+/* Duyuru Sol Kısım (Badge + Tarih) */
+.duyuru-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 70px;
+}
+
 .duyuru-tarih {
   flex-shrink: 0;
+  color: #888;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* Tip Badge Stilleri */
+.duyuru-tip-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.duyuru-tip-badge.normal {
   background: rgba(255, 215, 0, 0.15);
   color: var(--primary-yellow);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
-  white-space: nowrap;
+}
+
+.duyuru-tip-badge.link {
+  background: rgba(0, 150, 255, 0.2);
+  color: #00aaff;
+}
+
+.duyuru-tip-badge.yayin {
+  background: rgba(255, 0, 0, 0.2);
+  color: #ff4444;
+}
+
+.duyuru-tip-badge.onemli {
+  background: rgba(255, 100, 0, 0.2);
+  color: #ff6600;
+  animation: importantPulse 2s ease-in-out infinite;
+}
+
+@keyframes importantPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Duyuru İçerik */
+.duyuru-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
 }
 
 .duyuru-mesaj {
   color: var(--text-primary);
   font-size: 0.85rem;
   line-height: 1.5;
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.duyuru-saat {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--primary-yellow);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+/* Link Butonları */
+.duyuru-link-btn {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.duyuru-link-btn.link {
+  background: rgba(0, 150, 255, 0.15);
+  color: #00aaff;
+  border: 1px solid rgba(0, 150, 255, 0.3);
+}
+
+.duyuru-link-btn.link:hover {
+  background: rgba(0, 150, 255, 0.3);
+  transform: translateX(3px);
+}
+
+.duyuru-link-btn.yayin {
+  background: rgba(255, 0, 0, 0.15);
+  color: #ff4444;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.duyuru-link-btn.yayin:hover {
+  background: rgba(255, 0, 0, 0.3);
+}
+
+/* Tip'e göre satır vurguları */
+.duyuru-item.yayin {
+  background: rgba(255, 0, 0, 0.03);
+  border-left: 3px solid #ff4444;
+}
+
+.duyuru-item.onemli {
+  background: rgba(255, 100, 0, 0.03);
+  border-left: 3px solid #ff6600;
+}
+
+.duyuru-item.etkinlik {
+  background: rgba(138, 43, 226, 0.03);
+  border-left: 3px solid #aa66ff;
+}
+
+.duyuru-item.link {
+  border-left: 3px solid #00aaff;
 }
 
 /* Mobile responsive for new panels */
@@ -1974,11 +2103,26 @@ body {
 
   .duyuru-item {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .duyuru-left {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
     gap: 8px;
   }
 
-  .duyuru-tarih {
-    align-self: flex-start;
+  .duyuru-content {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .duyuru-link-btn {
+    align-self: flex-end;
   }
 }
 
