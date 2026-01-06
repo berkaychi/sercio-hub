@@ -1794,6 +1794,65 @@ body {
   animation: livePulse 1s ease-in-out infinite;
 }
 
+/* Deaktif Durum - Badge */
+.ep-live-badge.inactive {
+  background: linear-gradient(135deg, #666, #444);
+  color: #fff;
+  animation: none;
+}
+
+/* Deaktif Durum - Panel */
+.bonuslu-ep-panel.inactive {
+  background: linear-gradient(
+    145deg,
+    rgba(100, 100, 100, 0.1),
+    rgba(20, 20, 20, 0.95)
+  );
+  border-color: #555;
+  box-shadow: 0 0 20px rgba(100, 100, 100, 0.1);
+  animation: none;
+}
+
+.bonuslu-ep-panel.inactive .ep-panel-header {
+  border-bottom-color: rgba(100, 100, 100, 0.3);
+}
+
+.bonuslu-ep-panel.inactive .ep-panel-header h4 {
+  color: #888;
+  text-shadow: none;
+}
+
+.bonuslu-ep-panel.inactive .ep-panel-icon {
+  animation: none;
+}
+
+/* Deaktif Mesaj Stilleri */
+.ep-inactive-message {
+  text-align: center;
+  padding: 25px 15px;
+}
+
+.ep-inactive-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 15px;
+  opacity: 0.7;
+}
+
+.ep-inactive-text {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.ep-inactive-subtext {
+  color: #666;
+  font-size: 0.8rem;
+  margin: 0;
+  font-style: italic;
+}
+
 .ep-panel-content .ep-info-row {
   display: flex;
   justify-content: space-between;
@@ -1856,6 +1915,7 @@ body {
 /* ============ DUYURULAR PANELİ ============ */
 .duyurular-panel {
   margin-top: 20px;
+  margin-bottom: 25px;
 }
 
 .duyurular-list {
@@ -1919,5 +1979,55 @@ body {
 
   .duyuru-tarih {
     align-self: flex-start;
+  }
+}
+
+/* ==================== Discord Pop-up Banner ==================== */
+.discord-popup {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  left: auto !important;
+  top: auto !important;
+  z-index: 99999 !important;
+  text-decoration: none;
+  display: block;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  animation: popupSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.discord-popup-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4))
+    drop-shadow(0 8px 20px rgba(0, 0, 0, 0.5));
+}
+
+.discord-popup:hover .discord-popup-img {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.6))
+    drop-shadow(0 12px 30px rgba(0, 0, 0, 0.6));
+}
+
+/* Discord Popup Mobile */
+@media (max-width: 576px) {
+  .discord-popup {
+    bottom: 15px !important;
+    right: 15px !important;
+    width: 280px;
   }
 }
