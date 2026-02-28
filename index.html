@@ -1,128 +1,109 @@
 <!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Sosyal Medya Hub - Tüm bağlantılarımı keşfedin"
-    />
-    <title>Sercio - Sosyal Hub</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpeg" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <!-- Particles Canvas -->
-    <canvas id="particles-canvas"></canvas>
 
-    <!-- Smoke/Mist Effect -->
-    <div class="smoke-container">
-      <div class="smoke smoke-1"></div>
-      <div class="smoke smoke-2"></div>
-      <div class="smoke smoke-3"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sosyal Medya Hub - Tüm bağlantılarımı keşfedin" />
+  <title>Sercio - Sosyal Hub</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpeg" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Particles Canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Smoke/Mist Effect -->
+  <div class="smoke-container">
+    <div class="smoke smoke-1"></div>
+    <div class="smoke smoke-2"></div>
+    <div class="smoke smoke-3"></div>
+  </div>
+
+  <!-- Background Animation -->
+  <div class="background-animation"></div>
+
+  <div class="container">
+    <!-- Profile Section - Top Center -->
+    <div class="profile-section">
+      <div class="profile-image">
+        <img id="profileImage" src="" alt="Profile" onerror="this.style.display='none'" />
+        <div class="profile-ring"></div>
+      </div>
+      <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
+      <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
     </div>
 
-    <!-- Background Animation -->
-    <div class="background-animation"></div>
-
-    <div class="container">
-      <!-- Profile Section - Top Center -->
-      <div class="profile-section">
-        <div class="profile-image">
-          <img
-            id="profileImage"
-            src=""
-            alt="Profile"
-            onerror="this.style.display='none'"
-          />
-          <div class="profile-ring"></div>
-        </div>
-        <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
-        <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
-      </div>
-
-      <!-- Main Content Area - 3 Columns -->
-      <div class="main-content">
-        <!-- Left Column - Bonuslu EP -->
-        <div class="column discord-column">
-          <!-- Bonuslu EP Panel (direkt görünür) -->
-          <div
-            class="bonuslu-ep-panel"
-            id="bonusluEpPanel"
-            style="display: none"
-          >
-            <div class="ep-panel-header">
-              <span class="ep-panel-icon" id="epPanelIcon">🔥</span>
-              <h4>BONUSLU EP ÇEKİMİ</h4>
-              <span class="ep-live-badge" id="epLiveBadge">AKTİF</span>
-            </div>
-            <div class="ep-panel-content" id="epPanelContent">
-              <!-- Content will be loaded dynamically -->
-            </div>
+    <!-- Main Content Area - 3 Columns -->
+    <div class="main-content">
+      <!-- Left Column - Bonuslu EP -->
+      <div class="column discord-column">
+        <!-- Bonuslu EP Panel (direkt görünür) -->
+        <div class="bonuslu-ep-panel" id="bonusluEpPanel" style="display: none">
+          <div class="ep-panel-header">
+            <span class="ep-panel-icon" id="epPanelIcon">🔥</span>
+            <h4>BONUSLU EP ÇEKİMİ</h4>
+            <span class="ep-live-badge" id="epLiveBadge">AKTİF</span>
           </div>
-        </div>
-
-        <!-- Middle Column - Links -->
-        <div class="column center-column">
-          <div class="social-links-wrapper">
-            <h3 class="section-title">🔗 Bağlantılar</h3>
-            <div class="social-links" id="socialLinks">
-              <!-- Links will be loaded dynamically -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Column - Duyurular + Active Servers -->
-        <div class="column servers-column">
-          <!-- Duyurular Paneli -->
-          <div class="duyurular-panel">
-            <h3 class="section-title">📢 Duyurular</h3>
-            <div class="duyurular-list" id="duyurularList">
-              <!-- Duyurular will be loaded dynamically -->
-            </div>
-          </div>
-
-          <div class="servers-wrapper">
-            <h3 class="section-title">🎮 Aktif Oynadığımız Sunucular</h3>
-            <div class="servers-grid" id="serversGrid">
-              <!-- Servers will be loaded dynamically -->
-            </div>
+          <div class="ep-panel-content" id="epPanelContent">
+            <!-- Content will be loaded dynamically -->
           </div>
         </div>
       </div>
 
-      <!-- Bottom: YouTube Videos -->
-      <div class="youtube-section">
-        <h3 class="section-title">📺 Son Videolarım</h3>
-        <div class="videos-grid" id="videosGrid">
-          <!-- Videos will be loaded dynamically -->
+      <!-- Middle Column - Links -->
+      <div class="column center-column">
+        <div class="social-links-wrapper">
+          <h3 class="section-title">🔗 Bağlantılar</h3>
+          <div class="social-links" id="socialLinks">
+            <!-- Links will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Duyurular + Active Servers -->
+      <div class="column servers-column">
+        <!-- Duyurular Paneli -->
+        <div class="duyurular-panel">
+          <h3 class="section-title">📢 Duyurular</h3>
+          <div class="duyurular-list" id="duyurularList">
+            <!-- Duyurular will be loaded dynamically -->
+          </div>
+        </div>
+
+        <div class="servers-wrapper">
+          <h3 class="section-title">🎮 Aktif Oynadığımız Sunucular</h3>
+          <div class="servers-grid" id="serversGrid">
+            <!-- Servers will be loaded dynamically -->
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Discord Pop-up Banner -->
-    <a
-      href="https://discord.gg/sercio"
-      target="_blank"
-      class="discord-popup"
-      id="discordPopup"
-    >
-      <img src="dc.png" alt="Sercio Discord" class="discord-popup-img" />
-    </a>
-
-    <!-- Loading Spinner -->
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
+    <!-- Bottom: YouTube Videos -->
+    <div class="youtube-section">
+      <h3 class="section-title">📺 Son Videolarım</h3>
+      <div class="videos-grid" id="videosGrid">
+        <!-- Videos will be loaded dynamically -->
+      </div>
     </div>
+  </div>
 
-    <!-- Firebase SDK -->
-    <script type="module" src="firebase-config.js"></script>
-    <script type="module" src="app.js"></script>
-  </body>
+  <!-- Discord Pop-up Banner -->
+  <a href="https://discord.gg/sercio" target="_blank" class="discord-popup" id="discordPopup">
+    <img src="dc.png" alt="Sercio Discord" class="discord-popup-img" />
+  </a>
+
+  <!-- Loading Spinner -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+
 </html>
