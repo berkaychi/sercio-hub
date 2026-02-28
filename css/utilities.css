@@ -80,24 +80,25 @@
 }
 
 .discord-popup-img {
-    width: 60%;
-    height: 60%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
     position: relative;
     z-index: 2;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
 }
 
 .discord-popup:hover {
-    transform: scale(1.1) translateY(-5px);
+    transform: scale(1.05) translateY(-5px);
     box-shadow: 0 5px 25px rgba(88, 101, 242, 0.5),
         inset 0 0 15px rgba(255, 255, 255, 0.3);
     border-color: #5865f2;
 }
 
 .discord-popup:hover .discord-popup-img {
-    transform: scale(1.15) rotate(-5deg);
+    transform: scale(1.05);
 }
 
 /* Smoke Effect */
