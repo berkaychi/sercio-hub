@@ -1,0 +1,156 @@
+/* ============================================================
+ * css/utilities.css — Loading, Pop-up ve Yardımcı Sınıflar
+ * ============================================================ */
+
+/* Loading Screen */
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-bg);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease;
+}
+
+.loading.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-yellow);
+    animation: spin 1s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Discord Fixed Popup */
+.discord-popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #444, #111);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: popupSlideIn 1s ease-out 2s both,
+        float 4s ease-in-out infinite alternate;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+.discord-popup::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent 30%);
+    animation: spin 4s linear infinite;
+    pointer-events: none;
+}
+
+.discord-popup::after {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    background: #2b2d31;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.discord-popup-img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.discord-popup:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 5px 25px rgba(88, 101, 242, 0.5),
+        inset 0 0 15px rgba(255, 255, 255, 0.3);
+    border-color: #5865f2;
+}
+
+.discord-popup:hover .discord-popup-img {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+/* Smoke Effect */
+.smoke-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.4;
+}
+
+.smoke {
+    position: absolute;
+    bottom: -50px;
+    width: 200vw;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="blur"><feGaussianBlur stdDeviation="15"/></filter><circle cx="100" cy="100" r="80" fill="rgba(255,170,0,0.03)" filter="url(#blur)"/></svg>') repeat-x;
+    background-size: 50% auto;
+    animation: smokeMove 30s linear infinite;
+    transform-origin: bottom center;
+}
+
+.smoke-1 {
+    animation-duration: 40s;
+    opacity: 0.5;
+    bottom: -30px;
+}
+
+.smoke-2 {
+    animation-duration: 30s;
+    animation-direction: reverse;
+    opacity: 0.3;
+    transform: scaleY(1.2);
+    bottom: -40px;
+}
+
+.smoke-3 {
+    animation-duration: 50s;
+    opacity: 0.4;
+    transform: scaleY(0.8);
+    bottom: -20px;
+}
+
+@keyframes smokeMove {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -200vw 0;
+    }
+}

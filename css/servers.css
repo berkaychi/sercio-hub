@@ -1,0 +1,150 @@
+/* ============================================================
+ * css/servers.css — Aktif Sunucular Stilleri
+ * ============================================================ */
+
+.servers-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.server-card {
+    display: flex;
+    align-items: center;
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.server-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary-yellow);
+    transition: width 0.3s ease;
+    opacity: 0.5;
+}
+
+.server-card:hover {
+    transform: translateX(-5px);
+    border-color: var(--primary-yellow);
+    box-shadow: var(--neon-shadow-soft);
+}
+
+.server-card:hover::before {
+    width: 100%;
+    opacity: 0.1;
+}
+
+.server-logo {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    margin-right: 15px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    overflow: visible;
+}
+
+.server-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.server-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.server-status {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #1a1a1a;
+    z-index: 2;
+}
+
+.server-status.active {
+    background-color: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    animation: statusPulse 2s infinite;
+}
+
+.server-status.loading {
+    background-color: #ffaa00;
+    box-shadow: 0 0 10px #ffaa00;
+}
+
+.server-status.offline {
+    background-color: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+}
+
+.server-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+}
+
+.server-info h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.server-badge {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    letter-spacing: 0.5px;
+}
+
+.server-hover-text {
+    position: absolute;
+    right: 15px;
+    color: var(--primary-yellow);
+    font-size: 0.85rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.server-card:hover .server-hover-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.server-card:hover .server-info {
+    opacity: 0.4;
+}

@@ -1,0 +1,164 @@
+/* ============================================================
+ * css/social-links.css — Sosyal Medya Bağlantı Kartları Stilleri
+ * ============================================================ */
+
+.social-links {
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 215, 0, 0.1) 0%,
+            transparent 50%,
+            rgba(255, 215, 0, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.social-link::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg,
+            var(--primary-yellow),
+            transparent,
+            var(--secondary-yellow),
+            transparent);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: borderRotate 3s linear infinite;
+    background-size: 400% 400%;
+}
+
+.social-link:hover::before {
+    opacity: 1;
+}
+
+.social-link:hover::after {
+    opacity: 0.8;
+}
+
+.social-link:hover {
+    transform: translateX(8px) scale(1.02);
+    border-color: var(--primary-yellow);
+    box-shadow: var(--neon-shadow-soft), 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.social-link-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4), inset 0 0 15px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center,
+            var(--primary-yellow) 0%,
+            transparent 70%);
+    opacity: 0.08;
+    transition: opacity 0.3s ease;
+}
+
+.social-icon svg {
+    width: 26px;
+    height: 26px;
+    color: var(--link-color, var(--primary-yellow));
+    filter: drop-shadow(0 0 3px var(--link-color, rgba(255, 215, 0, 0.5)));
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.2),
+        inset 0 0 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+    border-color: var(--primary-yellow);
+}
+
+.social-link:hover .social-icon::before {
+    opacity: 0.3;
+}
+
+.social-link:hover .social-icon svg {
+    filter: drop-shadow(0 0 15px var(--link-color, var(--primary-yellow)));
+    transform: scale(1.1);
+}
+
+.social-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.social-info p {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.social-arrow {
+    font-size: 1.4rem;
+    color: var(--primary-yellow);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px var(--primary-yellow);
+}
+
+.social-link:hover .social-arrow {
+    transform: translateX(8px);
+    text-shadow: var(--neon-shadow);
+}

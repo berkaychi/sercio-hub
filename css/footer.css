@@ -1,0 +1,27 @@
+/* ============================================================
+ * css/footer.css — Footer / Copyright Stilleri
+ * ============================================================ */
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    width: 100%;
+}
+
+.footer p {
+    margin: 5px 0;
+}
+
+.footer a {
+    color: var(--primary-yellow);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    text-shadow: 0 0 10px var(--primary-yellow);
+}

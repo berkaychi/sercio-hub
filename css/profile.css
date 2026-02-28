@@ -1,0 +1,59 @@
+/* ============================================================
+ * css/profile.css — Profil Bölümü Stilleri
+ * ============================================================ */
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 30px;
+    animation: fadeInUp 1s ease-out;
+}
+
+.profile-image {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-yellow);
+    box-shadow: var(--neon-shadow);
+    position: relative;
+    z-index: 2;
+    animation: profileGlow 3s ease-in-out infinite;
+}
+
+.profile-ring {
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-yellow);
+    opacity: 0.4;
+    animation: ringRotate 10s linear infinite, ringPulse 2s ease-in-out infinite;
+    box-shadow: var(--neon-shadow-soft);
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-yellow);
+    text-shadow: var(--neon-shadow);
+    margin-bottom: 5px;
+    letter-spacing: 3px;
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+.profile-bio {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

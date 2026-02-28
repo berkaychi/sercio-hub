@@ -1,0 +1,244 @@
+/* ============================================================
+ * css/animations.css — Tüm @keyframes ve Arka Plan Stilleri
+ * ============================================================ */
+
+/* Animated Gradient Background */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 0% 50%,
+            rgba(255, 215, 0, 0.12) 0%,
+            transparent 50%),
+        radial-gradient(ellipse at 100% 50%,
+            rgba(255, 170, 0, 0.08) 0%,
+            transparent 50%),
+        radial-gradient(ellipse at 50% 100%,
+            rgba(255, 215, 0, 0.05) 0%,
+            transparent 40%);
+    z-index: -1;
+    animation: bgPulse 8s ease-in-out infinite;
+}
+
+@keyframes bgPulse {
+
+    0%,
+    100% {
+        opacity: 0.7;
+        filter: hue-rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        filter: hue-rotate(10deg);
+    }
+}
+
+@keyframes profileGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--primary-yellow), 0 0 40px rgba(255, 215, 0, 0.5);
+        filter: brightness(1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px var(--primary-yellow), 0 0 60px rgba(255, 215, 0, 0.7),
+            0 0 80px rgba(255, 170, 0, 0.4);
+        filter: brightness(1.1);
+    }
+}
+
+@keyframes ringRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ringPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05) rotate(180deg);
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 10px var(--primary-yellow), 0 0 20px var(--primary-yellow),
+            0 0 30px var(--secondary-yellow);
+    }
+
+    to {
+        text-shadow: 0 0 20px var(--primary-yellow), 0 0 40px var(--primary-yellow),
+            0 0 60px var(--secondary-yellow), 0 0 80px var(--neon-glow);
+    }
+}
+
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes badgePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes statusPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes epPanelGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 0 0 40px rgba(255, 215, 0, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.4), 0 0 60px rgba(255, 215, 0, 0.2);
+    }
+}
+
+@keyframes fireFlicker {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes livePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+}
+
+@keyframes importantPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes popupSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
