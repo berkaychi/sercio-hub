@@ -52,9 +52,9 @@ export async function loadDataFromSheets(sampleData) {
     if (!USE_SHEETS) return null;
 
     try {
-        // 5 saniye içinde cevap gelmezse iptal et (Timeout mekanizması)
+        // 10 saniye içinde cevap gelmezse iptal et (Timeout mekanizması)
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
         const [videolarRes, sunucularRes, topluEPRes, duyurularRes] =
             await Promise.all([
                 fetch(SHEETS_CONFIG.videolar, { signal: controller.signal }),
@@ -152,7 +152,7 @@ export async function loadDataFromSheets(sampleData) {
         };
     } catch (error) {
         if (error.name === "AbortError") {
-            console.error("Sheets verisi çekilirken zaman aşımı (5s) oluştu.");
+            console.error("Sheets verisi çekilirken zaman aşımı (10s) oluştu.");
         } else {
             console.error("Sheets verisi çekilirken hata:", error);
         }
