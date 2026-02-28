@@ -32,17 +32,11 @@
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
 }
 
-/* Discord Fixed Popup */
+/* Custom Discord Popup (Şeklini Koruyan Orijinal Logo İçin) */
 .discord-popup {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #444, #111);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8),
-        inset 0 0 10px rgba(255, 255, 255, 0.2);
     z-index: 100;
     display: flex;
     align-items: center;
@@ -51,54 +45,26 @@
     animation: popupSlideIn 1s ease-out 2s both,
         float 4s ease-in-out infinite alternate;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
 }
 
-.discord-popup::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(transparent,
-            rgba(255, 255, 255, 0.3),
-            transparent 30%);
-    animation: spin 4s linear infinite;
-    pointer-events: none;
-}
-
-.discord-popup::after {
-    content: "";
-    position: absolute;
-    inset: 3px;
-    background: #2b2d31;
-    border-radius: 50%;
-    z-index: 1;
-}
-
 .discord-popup-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
+    height: 80px;
+    width: auto;
+    object-fit: contain;
     position: relative;
     z-index: 2;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+    transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
 }
 
 .discord-popup:hover {
-    transform: scale(1.05) translateY(-5px);
-    box-shadow: 0 5px 25px rgba(88, 101, 242, 0.5),
-        inset 0 0 15px rgba(255, 255, 255, 0.3);
-    border-color: #5865f2;
+    transform: translateY(-5px);
 }
 
 .discord-popup:hover .discord-popup-img {
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(-3deg);
+    filter: drop-shadow(0 8px 15px rgba(88, 101, 242, 0.6));
 }
 
 /* Smoke Effect */

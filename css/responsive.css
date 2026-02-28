@@ -101,10 +101,12 @@
     }
 
     .discord-popup {
-        width: 65px;
-        height: 65px;
         bottom: 20px;
         right: 20px;
+    }
+
+    .discord-popup-img {
+        height: 65px;
     }
 }
 
