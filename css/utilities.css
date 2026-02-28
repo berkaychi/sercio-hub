@@ -154,3 +154,49 @@
         background-position: -200vw 0;
     }
 }
+
+/* Toast Bildirim */
+.toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--card-border);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 10000;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toast-notification::before {
+    content: "⚠️";
+    font-size: 1.1rem;
+}
+
+.toast-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast-notification.error {
+    border-bottom: 3px solid #ff4444;
+}
+
+.toast-notification.success {
+    border-bottom: 3px solid #00C851;
+}
+
+.toast-notification.success::before {
+    content: "✅";
+}

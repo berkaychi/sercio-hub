@@ -409,6 +409,27 @@ function formatDuyuruTarih(tarih) {
     return tarih;
 }
 
+// ---- Toast Bildirim (Hata / Bilgi) ----
+export function showToast(message, type = "error") {
+    const existingToast = document.querySelector(".toast-notification");
+    if (existingToast) existingToast.remove();
+
+    const toast = document.createElement("div");
+    toast.className = `toast-notification ${type}`;
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    // Kısa bir süre sonra görünür yap (CSS transition için)
+    setTimeout(() => toast.classList.add("show"), 10);
+
+    // 3.5 saniye sonra kapat
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 300); // 300ms CSS fade-out transition
+    }, 3500);
+}
+
 export function hideLoading() {
     if (loading) loading.classList.add("hidden");
 }

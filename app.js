@@ -11,6 +11,7 @@ import {
   renderTopluEP,
   renderDuyurular,
   hideLoading,
+  showToast,
 } from "./js/ui.js";
 import { initParticles } from "./js/particles.js";
 
@@ -50,12 +51,14 @@ async function initApp() {
         renderDuyurular(sheetsData.duyurular);
       } else {
         renderFallback();
+        showToast("Güncel veriler alınamadı, yedek veriler gösteriliyor.", "error");
       }
     }
   } catch (error) {
     console.error("Uygulama başlatılırken hata:", error);
     renderFallback();
     hideLoading();
+    showToast("Bağlantı hatası! Çevrimdışı sürüm gösteriliyor.", "error");
   }
 }
 
