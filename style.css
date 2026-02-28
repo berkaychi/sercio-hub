@@ -586,7 +586,7 @@ body {
   }
   50% {
     opacity: 0.7;
-    transform: scale(1.05);
+    transform: scale(1.05) rotate(180deg);
   }
 }
 
@@ -1206,15 +1206,15 @@ body {
     gap: 30px;
   }
 
-  .left-column {
+  .discord-column {
     flex: 0 0 240px;
   }
 
-  .middle-column {
+  .center-column {
     max-width: 350px;
   }
 
-  .right-column {
+  .servers-column {
     flex: 0 0 280px;
   }
 

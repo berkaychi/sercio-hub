@@ -314,7 +314,8 @@ async function fetchVideoTitle(videoId) {
 async function renderVideos(videoIds) {
   videosGrid.innerHTML = "";
 
-  for (const videoId of videoIds) {
+  // Tüm kartları önce DOM'a ekle, sonra başlıkları paralel çek
+  const cards = videoIds.map((videoId) => {
     const card = document.createElement("a");
     card.href = `https://www.youtube.com/watch?v=${videoId}`;
     card.className = "video-card";
@@ -336,14 +337,19 @@ async function renderVideos(videoIds) {
         `;
 
     videosGrid.appendChild(card);
+    return card;
+  });
 
-    fetchVideoTitle(videoId).then((title) => {
-      const titleElement = card.querySelector(".video-title");
-      if (titleElement) {
-        titleElement.textContent = title;
-      }
-    });
-  }
+  // Tüm başlık isteklerini aynı anda başlat (paralel)
+  const titlePromises = videoIds.map((videoId) => fetchVideoTitle(videoId));
+  const titles = await Promise.all(titlePromises);
+
+  titles.forEach((title, i) => {
+    const titleElement = cards[i].querySelector(".video-title");
+    if (titleElement) {
+      titleElement.textContent = title;
+    }
+  });
 }
 
 function renderServers(servers) {
@@ -365,20 +371,16 @@ function renderServers(servers) {
     }
 
     const logoContent = server.logo
-      ? `<img src="${server.logo}" alt="${
-          server.name
-        }" onerror="this.onerror=null; this.src='${faviconUrl}';">
-         <span class="server-icon" style="display:none;">${
-           server.icon || "🎮"
-         }</span>`
+      ? `<img src="${server.logo}" alt="${server.name
+      }" onerror="this.onerror=null; this.src='${faviconUrl}';">
+         <span class="server-icon" style="display:none;">${server.icon || "🎮"
+      }</span>`
       : faviconUrl
-      ? `<img src="${faviconUrl}" alt="${
-          server.name
+        ? `<img src="${faviconUrl}" alt="${server.name
         }" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-         <span class="server-icon" style="display:none;">${
-           server.icon || "🎮"
-         }</span>`
-      : `<span class="server-icon">${server.icon || "🎮"}</span>`;
+         <span class="server-icon" style="display:none;">${server.icon || "🎮"
+        }</span>`
+        : `<span class="server-icon">${server.icon || "🎮"}</span>`;
 
     card.innerHTML = `
             <div class="server-logo">
@@ -509,6 +511,7 @@ function getDuyuruTipConfig(tip) {
     link: { badge: "🔗 YENİ", buttonText: "Git →" },
     yayin: { badge: "🔴 CANLI", buttonText: "İzle →" },
     onemli: { badge: "⚠️ ÖNEMLİ", buttonText: "" },
+    etkinlik: { badge: "🎮 ETKİNLİK", buttonText: "Katıl →" },
   };
   return configs[tip] || configs.normal;
 }
@@ -527,6 +530,14 @@ function hideLoading() {
   loading.classList.add("hidden");
 }
 
+// Fallback verilerini tek yerden render etmek için yardımcı fonksiyon (DRY)
+function renderFallback() {
+  renderVideos(sampleData.youtubeVideos);
+  renderServers(sampleData.activeServers);
+  renderTopluEP(sampleData.topluEP);
+  renderDuyurular(sampleData.duyurular);
+}
+
 async function initApp() {
   try {
     renderProfile(sampleData.profile);
@@ -538,10 +549,7 @@ async function initApp() {
       renderTopluEP(loadingData.topluEP);
       renderDuyurular(loadingData.duyurular);
     } else {
-      renderVideos(sampleData.youtubeVideos);
-      renderServers(sampleData.activeServers);
-      renderTopluEP(sampleData.topluEP);
-      renderDuyurular(sampleData.duyurular);
+      renderFallback();
     }
 
     hideLoading();
@@ -555,18 +563,12 @@ async function initApp() {
         renderTopluEP(sheetsData.topluEP);
         renderDuyurular(sheetsData.duyurular);
       } else {
-        renderVideos(sampleData.youtubeVideos);
-        renderServers(sampleData.activeServers);
-        renderTopluEP(sampleData.topluEP);
-        renderDuyurular(sampleData.duyurular);
+        renderFallback();
       }
     }
   } catch (error) {
     console.error("Uygulama başlatılırken hata:", error);
-    renderVideos(sampleData.youtubeVideos);
-    renderServers(sampleData.activeServers);
-    renderTopluEP(sampleData.topluEP);
-    renderDuyurular(sampleData.duyurular);
+    renderFallback();
     hideLoading();
   }
 }
