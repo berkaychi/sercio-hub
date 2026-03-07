@@ -2,180 +2,169 @@
  * css/responsive.css — Medya Sorguları (Mobil/Tablet Uyumu)
  * ============================================================ */
 
-/* Tablet (1200px altı) */
+/* ============ TABLET ============ */
 @media (max-width: 1200px) {
-    .container {
-        padding: 30px 25px 40px;
-    }
+  .container {
+    padding: 30px 25px 40px;
+  }
 
-    .main-content {
-        gap: 30px;
-    }
+  .main-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 
-    .discord-column {
-        flex: 0 0 240px;
-    }
+  .center-column {
+    order: -1;
+  }
 
-    .center-column {
-        max-width: 350px;
-    }
+  .profile-image {
+    width: 130px;
+    height: 130px;
+  }
+  .profile-name {
+    font-size: 2rem;
+  }
 
-    .servers-column {
-        flex: 0 0 280px;
-    }
+  .discord-widget {
+    min-height: 350px;
+  }
 
-    .profile-image {
-        width: 130px;
-        height: 130px;
-    }
+  .discord-widget iframe {
+    min-height: 350px;
+  }
 
-    .profile-name {
-        font-size: 2rem;
-    }
-
-    .discord-widget {
-        min-height: 350px;
-    }
-
-    .discord-widget iframe {
-        min-height: 350px;
-    }
-
-    .video-card {
-        width: 200px;
-    }
+  .video-card {
+    width: 200px;
+  }
 }
 
-/* Notebook / Küçük Ekranlar (1024px altı) */
-@media (max-width: 1024px) {
-    .main-content {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .discord-column,
-    .servers-column {
-        flex: 1 1 300px;
-        max-width: 400px;
-    }
-
-    .center-column {
-        flex: 1 1 100%;
-        max-width: 600px;
-        order: -1;
-        margin-bottom: 20px;
-    }
-
-    .video-card {
-        width: calc(33.333% - 15px);
-    }
-}
-
-/* Tablet / Büyük Telefonlar (768px altı) */
+/* ============ MOBILE ============ */
 @media (max-width: 768px) {
-    .container {
-        padding: 20px 15px 30px;
-    }
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 
-    .main-content {
-        gap: 20px;
-    }
+  .container {
+    padding: 30px 15px 40px;
+    min-height: auto;
+  }
 
-    .discord-column,
-    .servers-column {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
 
-    .profile-image {
-        width: 110px;
-        height: 110px;
-    }
+  .center-column {
+    order: -1;
+  }
 
-    .profile-name {
-        font-size: 1.8rem;
-    }
+  .social-links-wrapper {
+    width: 100%;
+  }
 
-    .video-card {
-        width: calc(50% - 10px);
-    }
+  .servers-wrapper {
+    width: 100%;
+  }
 
-    .discord-popup {
-        bottom: 20px;
-        right: 20px;
-    }
+  .discord-wrapper {
+    width: 100%;
+  }
 
-    .discord-popup-img {
-        height: 65px;
-    }
+  .discord-widget {
+    min-height: 350px;
+  }
+
+  .discord-widget iframe {
+    min-height: 350px;
+  }
+
+  .profile-section {
+    width: 100%;
+  }
+
+  .profile-image {
+    width: 110px;
+    height: 110px;
+  }
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .social-link {
+    padding: 14px 18px;
+  }
+  .social-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.2rem;
+  }
+
+  .server-logo {
+    width: 50px;
+    height: 50px;
+  }
+
+  .youtube-section {
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  .videos-grid {
+    gap: 12px;
+  }
+
+  .video-card {
+    width: calc(50% - 8px);
+    min-width: 140px;
+  }
+
+  .video-info {
+    padding: 10px;
+  }
+
+  .video-info h4 {
+    font-size: 0.85rem;
+  }
+
+  .footer {
+    margin-top: 25px;
+  }
 }
 
-/* Küçük Telefonlar (480px altı) */
-@media (max-width: 480px) {
-    .container {
-        padding: 15px 10px 20px;
-    }
+/* ============ SMALL MOBILE ============ */
+@media (max-width: 400px) {
+  .container {
+    padding: 25px 12px 30px;
+  }
 
-    .profile-image {
-        width: 90px;
-        height: 90px;
-    }
+  .profile-name {
+    font-size: 1.7rem;
+    letter-spacing: 2px;
+  }
 
-    .profile-name {
-        font-size: 1.5rem;
-    }
+  .server-card {
+    padding: 12px;
+  }
 
-    .social-link {
-        padding: 10px 15px;
-    }
+  .server-logo {
+    width: 45px;
+    height: 45px;
+  }
 
-    .social-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-    }
+  .server-info h4 {
+    font-size: 0.85rem;
+  }
 
-    .social-icon svg {
-        width: 20px;
-        height: 20px;
-    }
+  .discord-widget {
+    min-height: 300px;
+  }
 
-    .social-info h3 {
-        font-size: 0.9rem;
-    }
+  .discord-widget iframe {
+    min-height: 300px;
+  }
 
-    .social-info p {
-        font-size: 0.7rem;
-    }
-
-    .video-card {
-        width: 100%;
-    }
-
-    .server-card {
-        padding: 10px 12px;
-    }
-
-    .server-logo {
-        width: 40px;
-        height: 40px;
-        margin-right: 12px;
-    }
-
-    .section-title {
-        font-size: 0.9rem;
-    }
-
-    .discord-widget,
-    .discord-placeholder {
-        min-height: 250px;
-    }
-
-    .ep-panel-header h2 {
-        font-size: 0.9rem;
-    }
-
-    .ep-info-row {
-        font-size: 0.85rem;
-    }
+  .video-card {
+    width: 100%;
+  }
 }

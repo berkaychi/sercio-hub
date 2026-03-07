@@ -7,6 +7,8 @@
   <meta name="description" content="Sercio Sosyal Hub - Tüm bağlantılarımı keşfedin" />
   <title>Sercio - Sosyal Hub</title>
   <link rel="icon" type="image/jpeg" href="logo.jpeg" />
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -64,23 +66,25 @@
         </div>
       </section>
 
-      <!-- Sağ Kolon - Duyurular + Aktif Sunucular -->
-      <aside class="column servers-column" aria-label="Duyurular ve Sunucular">
-        <!-- Duyurular Paneli -->
+      <!-- 3. Kolon - Duyurular -->
+      <aside class="column duyurular-column" aria-label="Duyurular">
         <section class="duyurular-panel" aria-label="Duyurular">
           <h2 class="section-title">📢 Duyurular</h2>
           <div class="duyurular-list" id="duyurularList">
             <!-- Duyurular dinamik olarak yüklenir -->
           </div>
         </section>
+      </aside>
 
+      <!-- 4. Kolon - Aktif Sunucular -->
+      <section class="column servers-column" aria-label="Aktif Sunucular">
         <div class="servers-wrapper">
           <h2 class="section-title">🎮 Aktif Oynadığımız Sunucular</h2>
           <div class="servers-grid" id="serversGrid">
             <!-- Sunucular dinamik olarak yüklenir -->
           </div>
         </div>
-      </aside>
+      </section>
     </main>
 
     <!-- Alt: YouTube Videoları -->

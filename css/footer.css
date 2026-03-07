@@ -3,25 +3,20 @@
  * ============================================================ */
 
 .footer {
-    margin-top: 40px;
-    text-align: center;
-    padding: 20px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    width: 100%;
+  width: 100%;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  padding: 20px 0;
+  margin-top: auto;
+  animation: fadeIn 1s ease-out 0.8s both;
 }
 
 .footer p {
-    margin: 5px 0;
+  transition: all 0.3s ease;
 }
 
-.footer a {
-    color: var(--primary-yellow);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer a:hover {
-    text-shadow: 0 0 10px var(--primary-yellow);
+.footer:hover p {
+  color: var(--primary-yellow);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }

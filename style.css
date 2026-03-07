@@ -1,27 +1,31 @@
-/* ============================================================
- * style.css — Ana CSS Giriş Noktası
+﻿/* ============================================================
+ * style.css — Ana Giriş Dosyası (Modüler CSS @import)
  * 
- * Bu dosya sadece diğer CSS modüllerini içe aktarır.
- * Modüller /css/ klasöründe bulunur.
+ * Tüm stiller css/ klasöründeki modüler dosyalarda yönetilir.
+ * Bu dosya sadece import sırasını belirler.
  * ============================================================ */
 
-/* 1. Reset ve Değişkenler */
-@import url("./css/variables.css");
-@import url("./css/base.css");
-@import url("./css/animations.css");
+/* 1. Değişkenler & Temel */
+@import url("css/variables.css");
+@import url("css/base.css");
+@import url("css/animations.css");
 
-/* 2. Genel Layout ve Araçlar */
-@import url("./css/layout.css");
-@import url("./css/utilities.css");
+/* 2. Sayfa Yapısı */
+@import url("css/layout.css");
 
-/* 3. Bileşenler (Components) */
-@import url("./css/profile.css");
-@import url("./css/social-links.css");
-@import url("./css/ep-panel.css");
-@import url("./css/duyurular.css");
-@import url("./css/servers.css");
-@import url("./css/videos.css");
-@import url("./css/footer.css");
+/* 3. Bileşenler */
+@import url("css/profile.css");
+@import url("css/social-links.css");
+@import url("css/discord.css");
+@import url("css/videos.css");
+@import url("css/servers.css");
+@import url("css/duyurular.css");
+@import url("css/ep-panel.css");
+@import url("css/toplu-ep.css");
+@import url("css/footer.css");
 
-/* 4. Responsive (Medya Sorguları en sonda olmalı) */
-@import url("./css/responsive.css");
+/* 4. Yardımcılar & Pop-up'lar */
+@import url("css/utilities.css");
+
+/* 5. Responsive (en sona — cascade override) */
+@import url("css/responsive.css");

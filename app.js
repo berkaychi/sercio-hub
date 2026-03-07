@@ -15,7 +15,7 @@ import {
 } from "./js/ui.js";
 import { initParticles } from "./js/particles.js";
 
-/** Sheets gelmezsee / hata durumunda statik verilerle render et */
+/** Sheets gelmezse / hata durumunda statik verilerle render et */
 function renderFallback() {
   renderVideos(sampleData.youtubeVideos);
   renderServers(sampleData.activeServers);

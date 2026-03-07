@@ -1,0 +1,378 @@
+/* ============================================================
+ * css/discord.css — Discord Widget, Kart ve Mini Widget Stilleri
+ * ============================================================ */
+
+/* Discord Wrapper */
+.discord-wrapper,
+.discord-widget-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.discord-widget {
+  background: var(--card-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 2px solid var(--card-border);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 400px;
+  transition: all 0.4s ease;
+}
+
+.discord-widget:hover {
+  border-color: #5865f2;
+  box-shadow:
+    0 0 20px rgba(88, 101, 242, 0.4),
+    0 0 40px rgba(88, 101, 242, 0.2);
+}
+
+.discord-widget iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+  border-radius: 14px;
+}
+
+/* Mini Discord Widget (Bağlantıların altında) - Custom */
+.discord-mini-widget {
+  margin-top: 15px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(88, 101, 242, 0.3);
+  background: #2b2d31;
+  transition: all 0.3s ease;
+}
+
+.discord-mini-widget:hover {
+  border-color: #5865f2;
+  box-shadow: 0 0 15px rgba(88, 101, 242, 0.3);
+}
+
+/* Discord Widget Header */
+.discord-widget-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: #1e1f22;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.discord-widget-icon {
+  width: 40px;
+  height: 40px;
+  background: #5865f2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discord-widget-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.discord-widget-info h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 2px 0;
+}
+
+.discord-online {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #b5bac1;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+  background: #23a559;
+  border-radius: 50%;
+}
+
+/* Discord Channels */
+.discord-channels {
+  padding: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.discord-channel {
+  margin-bottom: 4px;
+}
+
+.channel-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  color: #949ba4;
+  font-size: 0.85rem;
+}
+
+.channel-header:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #dbdee1;
+}
+
+.channel-icon {
+  font-size: 1rem;
+}
+
+.channel-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.channel-count {
+  background: rgba(88, 101, 242, 0.3);
+  color: #5865f2;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Channel Members */
+.channel-members {
+  margin-left: 20px;
+  padding: 4px 0;
+}
+
+.channel-member {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.channel-member:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.member-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.member-name {
+  font-size: 0.8rem;
+  color: #dbdee1;
+}
+
+/* Discord Members List (when no voice channels) */
+.discord-members-list {
+  padding: 8px;
+}
+
+.discord-member {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.discord-member:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.member-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+.member-status.online {
+  background: #23a559;
+}
+.member-status.idle {
+  background: #f0b232;
+}
+.member-status.dnd {
+  background: #f23f43;
+}
+
+.no-members {
+  text-align: center;
+  color: #949ba4;
+  font-size: 0.85rem;
+  padding: 20px;
+}
+
+/* Discord Join Button */
+.discord-mini-widget .discord-join-btn {
+  display: block;
+  margin: 8px;
+  padding: 10px;
+  background: #248046;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.discord-mini-widget .discord-join-btn:hover {
+  background: #1a6334;
+}
+
+/* Discord Placeholder */
+.discord-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 280px;
+  padding: 20px;
+  text-align: center;
+}
+
+.discord-placeholder-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.discord-placeholder h4 {
+  font-size: 1.2rem;
+  color: #5865f2;
+  margin-bottom: 8px;
+  text-shadow: 0 0 20px rgba(88, 101, 242, 0.5);
+}
+
+.discord-placeholder p {
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.discord-join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+  width: 100%;
+}
+
+.discord-join-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 20px rgba(88, 101, 242, 0.6),
+    0 8px 25px rgba(88, 101, 242, 0.4);
+}
+
+.discord-logo {
+  display: flex;
+  align-items: center;
+}
+
+/* Discord Card - Basit Temiz Tasarım */
+.discord-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #2b2d31;
+  border-radius: 8px;
+}
+
+.discord-banner {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #5865f2 0%, #7289da 100%);
+}
+
+.discord-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.discord-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px 20px;
+  margin-top: -30px;
+  background: #2b2d31;
+}
+
+.discord-card .discord-icon {
+  width: 60px;
+  height: 60px;
+  background: #5865f2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #2b2d31;
+}
+
+.discord-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 12px 0 4px;
+}
+
+.discord-desc {
+  font-size: 0.85rem;
+  color: #b5bac1;
+  margin: 0 0 15px;
+}
+
+.discord-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 20px;
+  background: #248046;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.discord-btn:hover {
+  background: #1a6334;
+}

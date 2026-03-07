@@ -4,69 +4,74 @@
 
 /* Main Container */
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    padding: 25px 30px 30px;
-    position: relative;
-    z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 25px 30px 30px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Main Content - 3 Column Layout (Equal Width) */
+/* Main Content - 4 Column Grid Layout */
 .main-content {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 /* Column Base Style */
 .column {
-    flex: 1;
-    min-width: 0;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Left Column - Discord */
 .discord-column {
-    animation: fadeInLeft 1s ease-out;
+  animation: fadeInLeft 1s ease-out;
 }
 
 /* Center Column - Profile + Links */
 .center-column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    animation: fadeInUp 1s ease-out 0.2s both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: fadeInUp 1s ease-out 0.2s both;
 }
 
-/* Right Column - Servers */
+/* Duyurular Column */
+.duyurular-column {
+  animation: fadeInRight 1s ease-out 0.4s both;
+}
+
+/* Servers Column */
 .servers-column {
-    animation: fadeInRight 1s ease-out 0.4s both;
+  animation: fadeInRight 1s ease-out 0.5s both;
 }
 
 /* Section Title */
 .section-title {
-    font-size: 1rem;
-    text-align: center;
-    margin-bottom: 12px;
-    color: var(--primary-yellow);
-    font-weight: 600;
-    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-    letter-spacing: 1px;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--primary-yellow);
+  font-weight: 600;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  letter-spacing: 1px;
 }
 
 /* Wrappers */
 .social-links-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .servers-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }

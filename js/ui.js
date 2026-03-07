@@ -11,425 +11,420 @@ const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
 const loading = document.getElementById("loading");
 
-// ---- Yardımcı: SVG string'i güvenli şekilde DOM node'a çevirir ----
-function createSvgElement(svgString) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(svgString, "image/svg+xml");
-    return doc.documentElement;
-}
-
 // ---- Profil ----
 export function renderProfile(profile) {
-    profileName.textContent = profile.name;
-    profileBio.textContent = profile.bio;
-    if (profile.image) {
-        profileImage.src = profile.image;
-        profileImage.style.display = "block";
-    }
+  profileName.textContent = profile.name;
+  profileBio.textContent = profile.bio;
+  if (profile.image) {
+    profileImage.src = profile.image;
+    profileImage.style.display = "block";
+  }
 }
 
 // ---- Sosyal Bağlantılar ----
 export function renderSocialLinks(links) {
-    socialLinksContainer.innerHTML = "";
+  socialLinksContainer.innerHTML = "";
 
-    const sortedLinks = [...links].sort(
-        (a, b) => (a.order || 0) - (b.order || 0)
-    );
+  const sortedLinks = [...links].sort(
+    (a, b) => (a.order || 0) - (b.order || 0),
+  );
 
-    sortedLinks.forEach((link) => {
-        const linkElement = document.createElement("a");
-        linkElement.href = link.url;
-        linkElement.className = "social-link";
-        linkElement.target = "_blank";
-        linkElement.rel = "noopener noreferrer";
+  sortedLinks.forEach((link) => {
+    const linkElement = document.createElement("a");
+    linkElement.href = link.url;
+    linkElement.className = "social-link";
+    linkElement.target = "_blank";
+    linkElement.rel = "noopener noreferrer";
 
-        if (link.color) {
-            linkElement.style.setProperty("--link-color", link.color);
-        }
+    if (link.color) {
+      linkElement.style.setProperty("--link-color", link.color);
+    }
 
-        // İkon — SVG güvenli olarak parse edilir (harici veri değil, kod içi sabit)
-        const iconDiv = document.createElement("div");
-        iconDiv.className = "social-icon";
-        if (link.icon) {
-            iconDiv.appendChild(createSvgElement(link.icon));
-        }
+    // İkon — FontAwesome class kullanılır
+    const iconDiv = document.createElement("div");
+    iconDiv.className = "social-icon";
+    if (link.icon) {
+      const iconEl = document.createElement("i");
+      iconEl.className = link.icon;
+      iconDiv.appendChild(iconEl);
+    }
 
-        const infoDiv = document.createElement("div");
-        infoDiv.className = "social-info";
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "social-info";
 
-        const nameH3 = document.createElement("h3");
-        nameH3.textContent = link.name;
+    const nameH3 = document.createElement("h3");
+    nameH3.textContent = link.name;
 
-        const descP = document.createElement("p");
-        descP.textContent = link.description;
+    const descP = document.createElement("p");
+    descP.textContent = link.description;
 
-        infoDiv.appendChild(nameH3);
-        infoDiv.appendChild(descP);
+    infoDiv.appendChild(nameH3);
+    infoDiv.appendChild(descP);
 
-        const contentDiv = document.createElement("div");
-        contentDiv.className = "social-link-content";
-        contentDiv.appendChild(iconDiv);
-        contentDiv.appendChild(infoDiv);
+    const contentDiv = document.createElement("div");
+    contentDiv.className = "social-link-content";
+    contentDiv.appendChild(iconDiv);
+    contentDiv.appendChild(infoDiv);
 
-        const arrow = document.createElement("span");
-        arrow.className = "social-arrow";
-        arrow.textContent = "→";
+    const arrow = document.createElement("span");
+    arrow.className = "social-arrow";
+    arrow.textContent = "→";
 
-        linkElement.appendChild(contentDiv);
-        linkElement.appendChild(arrow);
-        socialLinksContainer.appendChild(linkElement);
-    });
+    linkElement.appendChild(contentDiv);
+    linkElement.appendChild(arrow);
+    socialLinksContainer.appendChild(linkElement);
+  });
 }
 
 // ---- Video Başlığı Çek ----
 async function fetchVideoTitle(videoId) {
-    try {
-        const response = await fetch(
-            `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`
-        );
-        const data = await response.json();
-        return data.title || "Video";
-    } catch (error) {
-        console.error("Video başlığı alınamadı:", error);
-        return "Video";
-    }
+  try {
+    const response = await fetch(
+      `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`,
+    );
+    const data = await response.json();
+    return data.title || "Video";
+  } catch (error) {
+    console.error("Video başlığı alınamadı:", error);
+    return "Video";
+  }
 }
 
 // ---- Videolar ----
 export async function renderVideos(videoIds) {
-    videosGrid.innerHTML = "";
+  videosGrid.innerHTML = "";
 
-    // Tüm kartları önce DOM'a ekle
-    const cards = videoIds.map((videoId) => {
-        const card = document.createElement("a");
-        card.href = `https://www.youtube.com/watch?v=${videoId}`;
-        card.className = "video-card";
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
+  // Tüm kartları önce DOM'a ekle
+  const cards = videoIds.map((videoId) => {
+    const card = document.createElement("a");
+    card.href = `https://www.youtube.com/watch?v=${videoId}`;
+    card.className = "video-card";
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
 
-        const thumbnailDiv = document.createElement("div");
-        thumbnailDiv.className = "video-thumbnail";
+    const thumbnailDiv = document.createElement("div");
+    thumbnailDiv.className = "video-thumbnail";
 
-        const img = document.createElement("img");
-        img.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-        img.alt = "Video thumbnail";
+    const img = document.createElement("img");
+    img.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+    img.alt = "Video thumbnail";
 
-        const playBtn = document.createElement("div");
-        playBtn.className = "video-play-btn";
-        const playSpan = document.createElement("span");
-        playSpan.textContent = "▶";
-        playBtn.appendChild(playSpan);
+    const playBtn = document.createElement("div");
+    playBtn.className = "video-play-btn";
+    const playSpan = document.createElement("span");
+    playSpan.textContent = "▶";
+    playBtn.appendChild(playSpan);
 
-        thumbnailDiv.appendChild(img);
-        thumbnailDiv.appendChild(playBtn);
+    thumbnailDiv.appendChild(img);
+    thumbnailDiv.appendChild(playBtn);
 
-        const infoDiv = document.createElement("div");
-        infoDiv.className = "video-info";
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "video-info";
 
-        const titleH4 = document.createElement("h4");
-        titleH4.className = "video-title";
-        titleH4.textContent = "Yükleniyor...";
+    const titleH4 = document.createElement("h4");
+    titleH4.className = "video-title";
+    titleH4.textContent = "Yükleniyor...";
 
-        infoDiv.appendChild(titleH4);
-        card.appendChild(thumbnailDiv);
-        card.appendChild(infoDiv);
-        videosGrid.appendChild(card);
-        return { card, titleH4 };
-    });
+    infoDiv.appendChild(titleH4);
+    card.appendChild(thumbnailDiv);
+    card.appendChild(infoDiv);
+    videosGrid.appendChild(card);
+    return { card, titleH4 };
+  });
 
-    // Tüm başlıkları paralel çek
-    const titles = await Promise.all(videoIds.map(fetchVideoTitle));
-    titles.forEach((title, i) => {
-        cards[i].titleH4.textContent = title;
-    });
+  // Tüm başlıkları paralel çek
+  const titles = await Promise.all(videoIds.map(fetchVideoTitle));
+  titles.forEach((title, i) => {
+    cards[i].titleH4.textContent = title;
+  });
 }
 
 // ---- Sunucular ----
 export function renderServers(servers) {
-    serversGrid.innerHTML = "";
+  serversGrid.innerHTML = "";
 
-    servers.forEach((server) => {
-        const card = document.createElement("a");
-        card.href = server.url;
-        card.className = "server-card";
-        card.target = "_blank";
-        card.rel = "noopener noreferrer";
+  servers.forEach((server) => {
+    const card = document.createElement("a");
+    card.href = server.url;
+    card.className = "server-card";
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
 
-        let faviconUrl = "";
-        try {
-            const domain = new URL(server.url).hostname;
-            faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-        } catch (e) {
-            console.warn("URL parse error:", server.url);
-        }
+    let faviconUrl = "";
+    try {
+      const domain = new URL(server.url).hostname;
+      faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    } catch (e) {
+      console.warn("URL parse error:", server.url);
+    }
 
-        // Logo bölümü
-        const logoDiv = document.createElement("div");
-        logoDiv.className = "server-logo";
+    // Logo bölümü
+    const logoDiv = document.createElement("div");
+    logoDiv.className = "server-logo";
 
-        if (server.logo || faviconUrl) {
-            const img = document.createElement("img");
-            img.src = server.logo || faviconUrl;
-            img.alt = server.name; // güvenli textContent yerine alt (görsel metin)
-            if (!server.logo && faviconUrl) {
-                // Favicon yüklenemezse emoji ikonuna geç
-                const iconSpan = document.createElement("span");
-                iconSpan.className = "server-icon";
-                iconSpan.textContent = server.icon || "🎮";
-                iconSpan.style.display = "none";
-                img.addEventListener("error", () => {
-                    img.style.display = "none";
-                    iconSpan.style.display = "flex";
-                });
-                logoDiv.appendChild(img);
-                logoDiv.appendChild(iconSpan);
-            } else {
-                // Logo varsa favicon fallback
-                img.addEventListener("error", () => {
-                    img.src = faviconUrl;
-                });
-                logoDiv.appendChild(img);
-            }
-        } else {
-            const iconSpan = document.createElement("span");
-            iconSpan.className = "server-icon";
-            iconSpan.textContent = server.icon || "🎮";
-            logoDiv.appendChild(iconSpan);
-        }
+    if (server.logo || faviconUrl) {
+      const img = document.createElement("img");
+      img.src = server.logo || faviconUrl;
+      img.alt = server.name; // güvenli textContent yerine alt (görsel metin)
+      if (!server.logo && faviconUrl) {
+        // Favicon yüklenemezse emoji ikonuna geç
+        const iconSpan = document.createElement("span");
+        iconSpan.className = "server-icon";
+        iconSpan.textContent = server.icon || "🎮";
+        iconSpan.style.display = "none";
+        img.addEventListener("error", () => {
+          img.style.display = "none";
+          iconSpan.style.display = "flex";
+        });
+        logoDiv.appendChild(img);
+        logoDiv.appendChild(iconSpan);
+      } else {
+        // Logo varsa favicon fallback
+        img.addEventListener("error", () => {
+          img.src = faviconUrl;
+        });
+        logoDiv.appendChild(img);
+      }
+    } else {
+      const iconSpan = document.createElement("span");
+      iconSpan.className = "server-icon";
+      iconSpan.textContent = server.icon || "🎮";
+      logoDiv.appendChild(iconSpan);
+    }
 
-        const statusDiv = document.createElement("div");
-        statusDiv.className = `server-status ${server.status}`;
-        logoDiv.appendChild(statusDiv);
+    const statusDiv = document.createElement("div");
+    statusDiv.className = `server-status ${server.status}`;
+    logoDiv.appendChild(statusDiv);
 
-        // Bilgi bölümü
-        const infoDiv = document.createElement("div");
-        infoDiv.className = "server-info";
+    // Bilgi bölümü
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "server-info";
 
-        const nameH4 = document.createElement("h4");
-        nameH4.textContent = server.name;
+    const nameH4 = document.createElement("h4");
+    nameH4.textContent = server.name;
 
-        infoDiv.appendChild(nameH4);
+    infoDiv.appendChild(nameH4);
 
-        card.appendChild(logoDiv);
-        card.appendChild(infoDiv);
-        serversGrid.appendChild(card);
-    });
+    card.appendChild(logoDiv);
+    card.appendChild(infoDiv);
+    serversGrid.appendChild(card);
+  });
 }
 
 // ---- Toplu EP Paneli ----
 export function renderTopluEP(topluEP) {
-    const panel = document.getElementById("bonusluEpPanel");
-    const panelContent = document.getElementById("epPanelContent");
-    const panelIcon = document.getElementById("epPanelIcon");
-    const liveBadge = document.getElementById("epLiveBadge");
+  const panel = document.getElementById("bonusluEpPanel");
+  const panelContent = document.getElementById("epPanelContent");
+  const panelIcon = document.getElementById("epPanelIcon");
+  const liveBadge = document.getElementById("epLiveBadge");
 
-    if (panel) panel.style.display = "block";
+  if (panel) panel.style.display = "block";
 
-    if (!topluEP || !topluEP.active) {
-        if (panel) panel.classList.add("inactive");
-        if (panelIcon) panelIcon.textContent = "⏸️";
-        if (liveBadge) {
-            liveBadge.textContent = "BEKLEMEDE";
-            liveBadge.classList.add("inactive");
-        }
-        if (panelContent) {
-            panelContent.innerHTML = "";
-
-            const msg = document.createElement("div");
-            msg.className = "ep-inactive-message";
-
-            const icon = document.createElement("span");
-            icon.className = "ep-inactive-icon";
-            icon.textContent = "🎯";
-
-            const text = document.createElement("p");
-            text.className = "ep-inactive-text";
-            text.textContent = "Şu anda aktif bonuslu EP fırsatı bulunmamaktadır.";
-
-            const subtext = document.createElement("p");
-            subtext.className = "ep-inactive-subtext";
-            subtext.textContent = "Yeni fırsatlar için takipte kalın!";
-
-            msg.appendChild(icon);
-            msg.appendChild(text);
-            msg.appendChild(subtext);
-            panelContent.appendChild(msg);
-        }
-        return;
-    }
-
-    // Aktif durum
-    if (panel) panel.classList.remove("inactive");
-    if (panelIcon) panelIcon.textContent = "🔥";
+  if (!topluEP || !topluEP.active) {
+    if (panel) panel.classList.add("inactive");
+    if (panelIcon) panelIcon.textContent = "⏸️";
     if (liveBadge) {
-        liveBadge.textContent = "AKTİF";
-        liveBadge.classList.remove("inactive");
+      liveBadge.textContent = "BEKLEMEDE";
+      liveBadge.classList.add("inactive");
     }
-
     if (panelContent) {
-        panelContent.innerHTML = "";
+      panelContent.innerHTML = "";
 
-        const rows = [
-            { label: "📍 Sunucu", value: topluEP.serverName },
-            { label: "📅 Tarih", value: topluEP.date },
-            { label: "⏰ Saat", value: topluEP.time },
-        ];
+      const msg = document.createElement("div");
+      msg.className = "ep-inactive-message";
 
-        rows.forEach(({ label, value }) => {
-            const row = document.createElement("div");
-            row.className = "ep-info-row";
+      const icon = document.createElement("span");
+      icon.className = "ep-inactive-icon";
+      icon.textContent = "🎯";
 
-            const labelSpan = document.createElement("span");
-            labelSpan.className = "ep-label";
-            labelSpan.textContent = label;
+      const text = document.createElement("p");
+      text.className = "ep-inactive-text";
+      text.textContent = "Şu anda aktif bonuslu EP fırsatı bulunmamaktadır.";
 
-            const valueSpan = document.createElement("span");
-            valueSpan.className = "ep-value";
-            valueSpan.textContent = value;
+      const subtext = document.createElement("p");
+      subtext.className = "ep-inactive-subtext";
+      subtext.textContent = "Yeni fırsatlar için takipte kalın!";
 
-            row.appendChild(labelSpan);
-            row.appendChild(valueSpan);
-            panelContent.appendChild(row);
-        });
-
-        const desc = document.createElement("p");
-        desc.className = "ep-description";
-        desc.textContent = topluEP.description;
-        panelContent.appendChild(desc);
-
-        const btn = document.createElement("a");
-        btn.href = topluEP.serverUrl;
-        btn.target = "_blank";
-        btn.rel = "noopener noreferrer";
-        btn.className = "ep-panel-btn";
-        btn.textContent = topluEP.buttonText;
-        panelContent.appendChild(btn);
+      msg.appendChild(icon);
+      msg.appendChild(text);
+      msg.appendChild(subtext);
+      panelContent.appendChild(msg);
     }
+    return;
+  }
+
+  // Aktif durum
+  if (panel) panel.classList.remove("inactive");
+  if (panelIcon) panelIcon.textContent = "🔥";
+  if (liveBadge) {
+    liveBadge.textContent = "AKTİF";
+    liveBadge.classList.remove("inactive");
+  }
+
+  if (panelContent) {
+    panelContent.innerHTML = "";
+
+    const rows = [
+      { label: "📍 Sunucu", value: topluEP.serverName },
+      { label: "📅 Tarih", value: topluEP.date },
+      { label: "⏰ Saat", value: topluEP.time },
+    ];
+
+    rows.forEach(({ label, value }) => {
+      const row = document.createElement("div");
+      row.className = "ep-info-row";
+
+      const labelSpan = document.createElement("span");
+      labelSpan.className = "ep-label";
+      labelSpan.textContent = label;
+
+      const valueSpan = document.createElement("span");
+      valueSpan.className = "ep-value";
+      valueSpan.textContent = value;
+
+      row.appendChild(labelSpan);
+      row.appendChild(valueSpan);
+      panelContent.appendChild(row);
+    });
+
+    const desc = document.createElement("p");
+    desc.className = "ep-description";
+    desc.textContent = topluEP.description;
+    panelContent.appendChild(desc);
+
+    const btn = document.createElement("a");
+    btn.href = topluEP.serverUrl;
+    btn.target = "_blank";
+    btn.rel = "noopener noreferrer";
+    btn.className = "ep-panel-btn";
+    btn.textContent = topluEP.buttonText;
+    panelContent.appendChild(btn);
+  }
 }
 
 // ---- Duyurular ----
 export function renderDuyurular(duyurular) {
-    const duyurularList = document.getElementById("duyurularList");
-    if (!duyurularList) return;
+  const duyurularList = document.getElementById("duyurularList");
+  if (!duyurularList) return;
 
-    duyurularList.innerHTML = "";
+  duyurularList.innerHTML = "";
 
-    if (!duyurular || duyurular.length === 0) {
-        const emptyItem = document.createElement("div");
-        emptyItem.className = "duyuru-item";
+  if (!duyurular || duyurular.length === 0) {
+    const emptyItem = document.createElement("div");
+    emptyItem.className = "duyuru-item";
 
-        const tarihSpan = document.createElement("span");
-        tarihSpan.className = "duyuru-tarih";
-        tarihSpan.textContent = "-";
+    const tarihSpan = document.createElement("span");
+    tarihSpan.className = "duyuru-tarih";
+    tarihSpan.textContent = "-";
 
-        const mesajSpan = document.createElement("span");
-        mesajSpan.className = "duyuru-mesaj";
-        mesajSpan.textContent = "Henüz duyuru yok";
+    const mesajSpan = document.createElement("span");
+    mesajSpan.className = "duyuru-mesaj";
+    mesajSpan.textContent = "Henüz duyuru yok";
 
-        emptyItem.appendChild(tarihSpan);
-        emptyItem.appendChild(mesajSpan);
-        duyurularList.appendChild(emptyItem);
-        return;
+    emptyItem.appendChild(tarihSpan);
+    emptyItem.appendChild(mesajSpan);
+    duyurularList.appendChild(emptyItem);
+    return;
+  }
+
+  duyurular.forEach((d) => {
+    const tip = d.tip || "normal";
+    const tipConfig = getDuyuruTipConfig(tip);
+
+    const item = document.createElement("div");
+    item.className = `duyuru-item ${tip}`;
+
+    // Sol kısım: badge + tarih
+    const leftDiv = document.createElement("div");
+    leftDiv.className = "duyuru-left";
+
+    const badge = document.createElement("span");
+    badge.className = `duyuru-tip-badge ${tip}`;
+    badge.textContent = tipConfig.badge;
+
+    const tarih = document.createElement("span");
+    tarih.className = "duyuru-tarih";
+    tarih.textContent = formatDuyuruTarih(d.tarih);
+
+    leftDiv.appendChild(badge);
+    leftDiv.appendChild(tarih);
+
+    // Sağ kısım: mesaj + saat + link butonu
+    const contentDiv = document.createElement("div");
+    contentDiv.className = "duyuru-content";
+
+    const mesajSpan = document.createElement("span");
+    mesajSpan.className = "duyuru-mesaj";
+    mesajSpan.textContent = d.mesaj;
+
+    if (d.saat) {
+      const saatSpan = document.createElement("span");
+      saatSpan.className = "duyuru-saat";
+      saatSpan.textContent = `⏰ ${d.saat}`;
+      mesajSpan.appendChild(document.createTextNode(" "));
+      mesajSpan.appendChild(saatSpan);
     }
 
-    duyurular.forEach((d) => {
-        const tip = d.tip || "normal";
-        const tipConfig = getDuyuruTipConfig(tip);
+    contentDiv.appendChild(mesajSpan);
 
-        const item = document.createElement("div");
-        item.className = `duyuru-item ${tip}`;
+    if (d.link && tipConfig.buttonText) {
+      const linkBtn = document.createElement("a");
+      linkBtn.href = d.link;
+      linkBtn.target = "_blank";
+      linkBtn.rel = "noopener noreferrer";
+      linkBtn.className = `duyuru-link-btn ${tip}`;
+      linkBtn.textContent = tipConfig.buttonText;
+      contentDiv.appendChild(linkBtn);
+    }
 
-        // Sol kısım: badge + tarih
-        const leftDiv = document.createElement("div");
-        leftDiv.className = "duyuru-left";
-
-        const badge = document.createElement("span");
-        badge.className = `duyuru-tip-badge ${tip}`;
-        badge.textContent = tipConfig.badge;
-
-        const tarih = document.createElement("span");
-        tarih.className = "duyuru-tarih";
-        tarih.textContent = formatDuyuruTarih(d.tarih);
-
-        leftDiv.appendChild(badge);
-        leftDiv.appendChild(tarih);
-
-        // Sağ kısım: mesaj + saat + link butonu
-        const contentDiv = document.createElement("div");
-        contentDiv.className = "duyuru-content";
-
-        const mesajSpan = document.createElement("span");
-        mesajSpan.className = "duyuru-mesaj";
-        mesajSpan.textContent = d.mesaj;
-
-        if (d.saat) {
-            const saatSpan = document.createElement("span");
-            saatSpan.className = "duyuru-saat";
-            saatSpan.textContent = `⏰ ${d.saat}`;
-            mesajSpan.appendChild(document.createTextNode(" "));
-            mesajSpan.appendChild(saatSpan);
-        }
-
-        contentDiv.appendChild(mesajSpan);
-
-        if (d.link && tipConfig.buttonText) {
-            const linkBtn = document.createElement("a");
-            linkBtn.href = d.link;
-            linkBtn.target = "_blank";
-            linkBtn.rel = "noopener noreferrer";
-            linkBtn.className = `duyuru-link-btn ${tip}`;
-            linkBtn.textContent = tipConfig.buttonText;
-            contentDiv.appendChild(linkBtn);
-        }
-
-        item.appendChild(leftDiv);
-        item.appendChild(contentDiv);
-        duyurularList.appendChild(item);
-    });
+    item.appendChild(leftDiv);
+    item.appendChild(contentDiv);
+    duyurularList.appendChild(item);
+  });
 }
 
 // ---- Yardımcı Fonksiyonlar ----
 function getDuyuruTipConfig(tip) {
-    const configs = {
-        normal: { badge: "📢", buttonText: "" },
-        link: { badge: "🔗 YENİ", buttonText: "Git →" },
-        yayin: { badge: "🔴 CANLI", buttonText: "İzle →" },
-        onemli: { badge: "⚠️ ÖNEMLİ", buttonText: "" },
-        etkinlik: { badge: "🎮 ETKİNLİK", buttonText: "Katıl →" },
-    };
-    return configs[tip] || configs.normal;
+  const configs = {
+    normal: { badge: "📢", buttonText: "" },
+    link: { badge: "🔗 YENİ", buttonText: "Git →" },
+    yayin: { badge: "🔴 CANLI", buttonText: "İzle →" },
+    onemli: { badge: "⚠️ ÖNEMLİ", buttonText: "" },
+    etkinlik: { badge: "🎮 ETKİNLİK", buttonText: "Katıl →" },
+  };
+  return configs[tip] || configs.normal;
 }
 
 function formatDuyuruTarih(tarih) {
-    if (!tarih) return "-";
-    const parts = tarih.split(".");
-    if (parts.length >= 2) {
-        return `${parts[0]}.${parts[1]}`;
-    }
-    return tarih;
+  if (!tarih) return "-";
+  const parts = tarih.split(".");
+  if (parts.length >= 2) {
+    return `${parts[0]}.${parts[1]}`;
+  }
+  return tarih;
 }
 
 // ---- Toast Bildirim (Hata / Bilgi) ----
 export function showToast(message, type = "error") {
-    const existingToast = document.querySelector(".toast-notification");
-    if (existingToast) existingToast.remove();
+  const existingToast = document.querySelector(".toast-notification");
+  if (existingToast) existingToast.remove();
 
-    const toast = document.createElement("div");
-    toast.className = `toast-notification ${type}`;
-    toast.textContent = message;
+  const toast = document.createElement("div");
+  toast.className = `toast-notification ${type}`;
+  toast.textContent = message;
 
-    document.body.appendChild(toast);
+  document.body.appendChild(toast);
 
-    // Kısa bir süre sonra görünür yap (CSS transition için)
-    setTimeout(() => toast.classList.add("show"), 10);
+  // Kısa bir süre sonra görünür yap (CSS transition için)
+  setTimeout(() => toast.classList.add("show"), 10);
 
-    // 3.5 saniye sonra kapat
-    setTimeout(() => {
-        toast.classList.remove("show");
-        setTimeout(() => toast.remove(), 300); // 300ms CSS fade-out transition
-    }, 3500);
+  // 3.5 saniye sonra kapat
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 300); // 300ms CSS fade-out transition
+  }, 3500);
 }
 
 export function hideLoading() {
-    if (loading) loading.classList.add("hidden");
+  if (loading) loading.classList.add("hidden");
 }
