@@ -6,6 +6,12 @@ const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
 const loading = document.getElementById("loading");
 
+if (profileImage) {
+  profileImage.addEventListener("error", () => {
+    profileImage.style.display = "none";
+  });
+}
+
 export function renderProfile(profile) {
   profileName.textContent = profile.name;
   profileBio.textContent = profile.bio;
@@ -16,7 +22,7 @@ export function renderProfile(profile) {
 }
 
 export function renderSocialLinks(links) {
-  socialLinksContainer.innerHTML = "";
+  socialLinksContainer.replaceChildren();
 
   const sortedLinks = [...links].sort(
     (a, b) => (a.order || 0) - (b.order || 0),
@@ -60,6 +66,7 @@ export function renderSocialLinks(links) {
 
     const arrow = document.createElement("span");
     arrow.className = "social-arrow";
+    arrow.setAttribute("aria-hidden", "true");
     arrow.textContent = "→";
 
     linkElement.appendChild(contentDiv);
@@ -89,14 +96,13 @@ async function fetchVideoTitle(videoId) {
       /* quota */
     }
     return title;
-  } catch (error) {
-    console.error("Video başlığı alınamadı:", error);
+  } catch {
     return "Video";
   }
 }
 
 export async function renderVideos(videoIds) {
-  videosGrid.innerHTML = "";
+  videosGrid.replaceChildren();
 
   const cards = videoIds.map((videoId) => {
     const card = document.createElement("a");
@@ -111,6 +117,9 @@ export async function renderVideos(videoIds) {
     const img = document.createElement("img");
     img.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
     img.alt = "Video küçük resmi";
+    img.loading = "lazy";
+    img.width = 320;
+    img.height = 180;
 
     const playBtn = document.createElement("div");
     playBtn.className = "video-play-btn";
@@ -144,7 +153,7 @@ export async function renderVideos(videoIds) {
 }
 
 export function renderServers(servers) {
-  serversGrid.innerHTML = "";
+  serversGrid.replaceChildren();
 
   servers.forEach((server) => {
     const card = document.createElement("a");
@@ -157,8 +166,8 @@ export function renderServers(servers) {
     try {
       const domain = new URL(server.url).hostname;
       faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-    } catch (e) {
-      console.warn("URL parse error:", server.url);
+    } catch {
+      /* geçersiz URL */
     }
 
     const logoDiv = document.createElement("div");
@@ -226,7 +235,7 @@ export function renderTopluEP(topluEP) {
       liveBadge.classList.add("inactive");
     }
     if (panelContent) {
-      panelContent.innerHTML = "";
+      panelContent.replaceChildren();
 
       const msg = document.createElement("div");
       msg.className = "ep-inactive-message";
@@ -259,7 +268,7 @@ export function renderTopluEP(topluEP) {
   }
 
   if (panelContent) {
-    panelContent.innerHTML = "";
+    panelContent.replaceChildren();
 
     const rows = [
       { label: "📍 Sunucu", value: topluEP.serverName },
@@ -303,7 +312,7 @@ export function renderDuyurular(duyurular) {
   const duyurularList = document.getElementById("duyurularList");
   if (!duyurularList) return;
 
-  duyurularList.innerHTML = "";
+  duyurularList.replaceChildren();
 
   if (!duyurular || duyurular.length === 0) {
     const emptyItem = document.createElement("div");
@@ -403,6 +412,8 @@ export function showToast(message, type = "error") {
 
   const toast = document.createElement("div");
   toast.className = `toast-notification ${type}`;
+  toast.setAttribute("role", "alert");
+  toast.setAttribute("aria-live", "assertive");
   toast.textContent = message;
 
   document.body.appendChild(toast);

@@ -25,14 +25,6 @@
     font-size: 2rem;
   }
 
-  .discord-widget {
-    min-height: 350px;
-  }
-
-  .discord-widget iframe {
-    min-height: 350px;
-  }
-
   .video-card {
     width: 200px;
   }
@@ -69,14 +61,6 @@
 
   .discord-wrapper {
     width: 100%;
-  }
-
-  .discord-widget {
-    min-height: 350px;
-  }
-
-  .discord-widget iframe {
-    min-height: 350px;
   }
 
   .profile-section {
@@ -162,14 +146,6 @@
 
   .server-info h4 {
     font-size: 0.85rem;
-  }
-
-  .discord-widget {
-    min-height: 300px;
-  }
-
-  .discord-widget iframe {
-    min-height: 300px;
   }
 
   .video-card {

@@ -36,12 +36,12 @@
 
 /* ==================== Discord Pop-up Banner ==================== */
 .discord-popup {
-  position: fixed !important;
-  bottom: 20px !important;
-  right: 20px !important;
-  left: auto !important;
-  top: auto !important;
-  z-index: 99999 !important;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  top: auto;
+  z-index: 99999;
   text-decoration: none;
   display: block;
   width: 320px;
@@ -67,8 +67,8 @@
 /* Discord Popup Mobile */
 @media (max-width: 576px) {
   .discord-popup {
-    bottom: 15px !important;
-    right: 15px !important;
+    bottom: 15px;
+    right: 15px;
     width: 280px;
   }
 }

@@ -17,7 +17,7 @@
 /* Main Content - 4 Column Grid Layout */
 .main-content-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: 1fr 1fr 1.3fr 0.7fr;
   align-items: start;
   gap: 25px;
   max-width: 1400px;

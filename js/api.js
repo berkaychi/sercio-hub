@@ -39,6 +39,21 @@ export function parseCSV(csv) {
 }
 
 /**
+ * URL'yi doğrular — yalnızca http(s) protokolü kabul eder.
+ * @param {string} url
+ * @returns {boolean}
+ */
+function isSafeUrl(url) {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+/**
  * Google Sheets'ten tüm verileri çeker ve yapılandırılmış obje döndürür.
  * Hata durumunda null döndürür.
  * @param {object} sampleData — fallback için
@@ -68,8 +83,10 @@ export async function loadDataFromSheets(sampleData) {
     const duyurularCSV = duyurularRes ? await duyurularRes.text() : "";
 
     const videolarRows = parseCSV(videolarCSV);
+    const rawChannel = videolarRows[0]?.[0];
     const youtubeChannel =
-      videolarRows[0]?.[0] || sampleData.socialLinks[0].url;
+      (rawChannel && isSafeUrl(rawChannel) ? rawChannel : null) ||
+      sampleData.socialLinks[0].url;
     const videoIds = videolarRows
       .slice(1)
       .map((row) => row[0])
@@ -85,7 +102,7 @@ export async function loadDataFromSheets(sampleData) {
         logo: "",
         icon: "🎮",
       }))
-      .filter((s) => s.name && s.url);
+      .filter((s) => s.name && isSafeUrl(s.url));
 
     const topluEPRows = parseCSV(topluEPCSV);
     const topluEPData = {};
@@ -95,10 +112,11 @@ export async function loadDataFromSheets(sampleData) {
       }
     });
 
+    const rawServerUrl = topluEPData.serverUrl || "";
     const topluEP = {
       active: topluEPData.active?.toLowerCase() === "true",
       serverName: topluEPData.serverName || "",
-      serverUrl: topluEPData.serverUrl || "",
+      serverUrl: isSafeUrl(rawServerUrl) ? rawServerUrl : "",
       date: topluEPData.date || "",
       time: topluEPData.time || "",
       description: topluEPData.description || "",
@@ -118,6 +136,9 @@ export async function loadDataFromSheets(sampleData) {
           let link = row[3] || "";
           if (link && !link.match(/^https?:\/\//i)) {
             link = "https://" + link;
+          }
+          if (link && !isSafeUrl(link)) {
+            link = "";
           }
           return {
             tarih: row[0] || "",
@@ -146,12 +167,7 @@ export async function loadDataFromSheets(sampleData) {
       topluEP: topluEP.serverName ? topluEP : sampleData.topluEP,
       duyurular: duyurular,
     };
-  } catch (error) {
-    if (error.name === "AbortError") {
-      console.error("Sheets verisi çekilirken zaman aşımı (10s) oluştu.");
-    } else {
-      console.error("Sheets verisi çekilirken hata:", error);
-    }
+  } catch {
     return null;
   }
 }

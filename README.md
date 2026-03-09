@@ -2,7 +2,7 @@
 
 Metin2 içerik üreticisi **Sercio** için tasarlanmış, sarı-siyah neon temalı sosyal medya hub sitesi.
 
-![Version](https://img.shields.io/badge/version-v9-gold)
+![Version](https://img.shields.io/badge/version-v10-gold)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
@@ -29,7 +29,8 @@ Metin2 içerik üreticisi **Sercio** için tasarlanmış, sarı-siyah neon temal
 - **Glassmorphism Efektleri**: Modern cam efektli kartlar
 - **Ateş Parçacık Animasyonu**: Canvas tabanlı kıvılcım ve kor efektleri
 - **Neon Glow Efektleri**: Tüm interaktif elementlerde parlama animasyonları
-- **Tam Responsive**: Mobil, tablet ve masaüstü uyumlu
+- **Tam Responsive**: Mobil, tablet ve masaüstü uyumlu (4→2→1 sütun)
+- **Erişilebilirlik**: `prefers-reduced-motion` desteği, ARIA etiketleri, skip-link
 
 ### 👤 Profil Bölümü
 
@@ -40,63 +41,53 @@ Metin2 içerik üreticisi **Sercio** için tasarlanmış, sarı-siyah neon temal
 
 ### 🔗 Sosyal Medya Linkleri
 
-| Platform  | Logo Rengi           | Açıklama                 |
-| --------- | -------------------- | ------------------------ |
-| YouTube   | 🔴 Kırmızı (#FF0000) | SVG logo, sarı neon kutu |
-| WhatsApp  | 🟢 Yeşil (#25D366)   | SVG logo, sarı neon kutu |
-| Instagram | 🟣 Pembe (#E4405F)   | SVG logo, sarı neon kutu |
+| Platform  | Renk                  | İkon              |
+| --------- | --------------------- | ----------------- |
+| YouTube   | 🔴 Kırmızı (#FF0000) | FontAwesome       |
+| Instagram | 🟣 Pembe (#E4405F)   | FontAwesome       |
+| Facebook  | 🔵 Mavi (#1877F2)    | FontAwesome       |
+| WhatsApp  | 🟢 Yeşil (#25D366)   | FontAwesome       |
 
-- Her platform kendi orijinal renginde SVG logo kullanır
+- Her platform kendi orijinal renginde FontAwesome ikonu kullanır
 - Hover efektleri ve geçiş animasyonları
+- Sıralama `order` değeriyle kontrol edilir
 
-### 💬 Discord Kartı
+### 📢 Duyurular Paneli
 
-- Özel banner resmi (logo2.jpeg)
-- Discord sunucu bilgileri
-- "Sunucuya Katıl" butonu
-- Glassmorphism tasarım
+- Tip bazlı duyurular: Normal, Link, Canlı Yayın, Önemli, Etkinlik
+- Her tip için farklı renk ve badge
+- Tarih, saat ve aksiyon butonları
+- Google Sheets'ten dinamik yükleme
 
 ### 🎮 Aktif Sunucular
 
 - Otomatik favicon çekme (Google Favicon API)
 - Aktif/pasif durum göstergesi (yeşil nokta)
-- Sunucu adı ve "Aktif" badge
-- Hover'da "Sunucuya Git →" animasyonu
+- Sunucu adı
+- Hover animasyonu
 
 ### 📺 YouTube Videoları
 
-- Video thumbnail gösterimi
-- Otomatik başlık çekme (noembed API)
+- Video thumbnail gösterimi (lazy loading)
+- Otomatik başlık çekme (noembed API) + sessionStorage cache
 - Play butonu overlay
-- 3 video grid düzeni
+- Grid düzeni
 
-### 🎯 Toplu EP Sistemi
+### 🎯 Bonuslu EP Sistemi
 
-Metin2 oyuncuları için toplu EP (Experience Point) çekimi duyuru sistemi.
+Metin2 oyuncuları için bonuslu EP çekimi duyuru paneli.
 
-**Floating Button:**
-
-- Sağ üstte sabit konum
-- Pulse animasyonu
-- "🔥 Toplu EP" yazısı
-- Yeşil "canlı" göstergesi
-
-**Modal Popup:**
-
-- Sunucu adı
-- Tarih ve saat bilgisi
-- Açıklama metni
+- Sol sütunda inline panel
+- Aktif/Beklemede durumu
+- Sunucu adı, tarih, saat bilgileri
 - Discord'a yönlendirme butonu
-- Açma/kapama animasyonları
+- Glow animasyonu (aktifken)
 
-**Kontrol:**
+### 💬 Discord Pop-up
 
-```javascript
-topluEP: {
-  active: true,  // true = göster, false = gizle
-  // ...
-}
-```
+- Sağ altta sabit pop-up banner (dc.png)
+- Discord sunucusuna davet linki
+- Slide-in animasyonu
 
 ### 🔥 Ateş Parçacık Animasyonu
 
@@ -104,46 +95,50 @@ topluEP: {
 - **Embers (Korlar)**: Yavaş hareket eden atmosferik parçacıklar
 - Canvas tabanlı performanslı render
 - Sarı, turuncu, kırmızı renk paleti
+- `prefers-reduced-motion` desteği (hareket hassas kullanıcılarda devre dışı)
 
 ---
 
 ## 🖼️ Ekran Yapısı
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                                              [🔥Toplu EP]│
-│                                                         │
-│                    ┌──────────┐                         │
-│                    │  ⚡ LOGO │                         │
-│                    │  Sercio  │                         │
-│                    │ Bizi ... │                         │
-│                    └──────────┘                         │
-│                                                         │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │
-│  │   DISCORD   │  │   YOUTUBE   │  │    AKTİF    │     │
-│  │    KART     │  │   WHATSAPP  │  │  SUNUCULAR  │     │
-│  │   banner    │  │  INSTAGRAM  │  │  Reborn MT2 │     │
-│  │ Sunucuya    │  │             │  │  TruvaMT2   │     │
-│  │   Katıl     │  │             │  │             │     │
-│  └─────────────┘  └─────────────┘  └─────────────┘     │
-│                                                         │
-│              ┌───────────────────────┐                  │
-│              │    YOUTUBE VİDEOLARI   │                  │
-│              │  ┌─────┐┌─────┐┌─────┐│                  │
-│              │  │vid 1││vid 2││vid 3││                  │
-│              │  └─────┘└─────┘└─────┘│                  │
-│              └───────────────────────┘                  │
-│                                                         │
-│              İletişim: info@sercio.com                  │
-│         🔥 ateş parçacıkları animasyonu 🔥              │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                    ┌──────────┐                              │
+│                    │  ⚡ LOGO │                              │
+│                    │  Sercio  │                              │
+│                    │ Bizi ... │                              │
+│                    └──────────┘                              │
+│                                                              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐    │
+│  │ BONUSLU  │  │  🔗      │  │ 📢       │  │ 🎮 AKTİF │    │
+│  │ EP PANELİ│  │ YouTube  │  │ Duyurular │  │ SUNUCULAR│    │
+│  │  🔥      │  │ Instagram│  │  Canlı    │  │ Reborn   │    │
+│  │ Sunucu   │  │ Facebook │  │  Etkinlik │  │ Truva    │    │
+│  │ Tarih    │  │ WhatsApp │  │  Link     │  │          │    │
+│  │ Discord  │  │          │  │           │  │          │    │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘    │
+│                                                              │
+│            ┌────────────────────────────────┐                │
+│            │       📺 SON VİDEOLARIM        │                │
+│            │  ┌────────┐┌────────┐┌────────┐│                │
+│            │  │ vid 1  ││ vid 2  ││ vid 3  ││                │
+│            │  └────────┘└────────┘└────────┘│                │
+│            └────────────────────────────────┘                │
+│                                                              │
+│              © 2026 Sercio. Tüm hakları saklıdır.           │
+│         🔥 ateş parçacıkları animasyonu 🔥                   │
+│                                         ┌──────────┐        │
+│                                         │ DC Popup │        │
+│                                         └──────────┘        │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-**3 Sütun Layout:**
+**4 Sütun Layout:**
 
-1. **Sol Sütun**: Discord kartı
-2. **Orta Sütun**: Sosyal medya linkleri
-3. **Sağ Sütun**: Aktif sunucular
+1. **Sol Sütun**: Bonuslu EP paneli
+2. **Orta Sütun**: Sosyal medya bağlantıları
+3. **Duyurular Sütunu**: Duyurular paneli
+4. **Sağ Sütun**: Aktif sunucular
 
 ---
 
@@ -152,7 +147,7 @@ topluEP: {
 ### Gereksinimler
 
 - Modern web tarayıcı (Chrome, Firefox, Edge, Safari)
-- Yerel sunucu (opsiyonel, CORS için)
+- Yerel sunucu (opsiyonel, ES Modules için)
 
 ### Adımlar
 
@@ -191,32 +186,41 @@ topluEP: {
 
 ## ⚙️ Yapılandırma
 
-Tüm ayarlar `app.js` dosyasındaki `sampleData` objesi içinde yapılır.
+### Veri Kaynağı
+
+Proje iki veri kaynağını destekler:
+
+1. **Google Sheets (varsayılan)**: `js/api.js` içindeki `USE_SHEETS = true` ile aktif. Videolar, sunucular, EP bilgileri ve duyurular Sheets'ten çekilir.
+2. **Statik veri (fallback)**: Sheets erişilemezse `js/data.js` içindeki `sampleData` kullanılır.
 
 ### 👤 Profil Bilgileri
 
+`js/data.js` dosyasında:
+
 ```javascript
 profile: {
-  name: "Sercio",           // Görünen isim
-  bio: "Bizi Takip Edin",   // Alt yazı
-  image: "logo.jpeg",       // Profil fotoğrafı
+  name: "Sercio",
+  bio: "Bizi Takip Edin",
+  image: "logo.jpeg",
 }
 ```
 
 ### 🔗 Sosyal Medya Linkleri
 
+`js/data.js` dosyasında:
+
 ```javascript
 socialLinks: [
   {
     name: "YouTube",
-    description: "Videoları takip et",
-    url: "https://youtube.com/@mokrr",
-    icon: "<svg>...</svg>", // SVG logo kodu
-    color: "#FF0000", // Logo rengi
-    order: 1, // Görüntülenme sırası
+    description: "",
+    url: "https://www.youtube.com/@Sercio-m4d",
+    icon: "fa-brands fa-youtube",
+    color: "#FF0000",
+    order: 1,
   },
   // ...diğer linkler
-];
+]
 ```
 
 ### 🎮 Aktif Sunucular
@@ -224,13 +228,13 @@ socialLinks: [
 ```javascript
 activeServers: [
   {
-    name: "Reborn MT2", // Sunucu adı
-    logo: "", // Logo URL (boş = otomatik favicon)
-    icon: "⚔️", // Fallback emoji
-    url: "https://reborn2.com", // Sunucu web sitesi
-    status: "active", // "active" veya "inactive"
+    name: "Reborn MT2",
+    logo: "",          // Boş = otomatik favicon
+    icon: "⚔️",       // Fallback emoji
+    url: "https://reborn2.com",
+    status: "active",  // "active" veya "inactive"
   },
-];
+]
 ```
 
 ### 📺 YouTube Videoları
@@ -238,75 +242,50 @@ activeServers: [
 ```javascript
 // Video ID'lerini YouTube URL'den alın
 // https://youtube.com/watch?v=VIDEO_ID
-youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"];
+youtubeVideos: ["2IlU7GLny2E", "1H2_z9JWjWo", "4Z5Qc-UsGjw"]
 ```
 
-### 💬 Discord Ayarları
-
-```javascript
-discord: {
-  name: "Sercio Discord",              // Sunucu adı
-  description: "Topluluğumuza katıl!", // Açıklama
-  inviteLink: "https://discord.gg/sercio", // Davet linki
-  banner: "logo2.jpeg",                // Banner resmi
-}
-```
-
-### 🎯 Toplu EP Ayarları
+### 🎯 Bonuslu EP Ayarları
 
 ```javascript
 topluEP: {
-  active: true,                    // true = göster, false = gizle
-  serverName: "Reborn MT2",        // Hangi sunucuda
-  serverUrl: "https://discord.gg/sercio", // Yönlendirme linki
-  date: "Bugün",                   // Tarih
-  time: "21:00",                   // Saat
-  description: "Toplu EP çekimine katılmak için Discord sunucumuza gel!",
-  buttonText: "Discord'a Katıl",   // Buton yazısı
+  active: true,                    // true = göster, false = beklemede
+  serverName: "Reborn MT2",
+  serverUrl: "https://discord.gg/sercio",
+  date: "Bugün",
+  time: "21:00",
+  description: "Bonuslu EP çekimine katılmak için Discord sunucumuza gel!",
+  buttonText: "Discord'a Katıl",
 }
 ```
 
-### 📝 Footer
+### 📢 Duyurular
 
 ```javascript
-footer: {
-  text: "İletişim: info@sercio.com";
-}
+duyurular: [
+  {
+    tarih: "06.01.2026",
+    mesaj: "Canlı yayın başlıyor!",
+    tip: "yayin",        // normal | link | yayin | onemli | etkinlik
+    link: "https://youtube.com/@Sercio-x3s/live",
+    saat: "21:00",
+  },
+]
 ```
 
----
+### Google Sheets Yapılandırması
 
-## 🔥 Firebase Entegrasyonu (Opsiyonel)
-
-Verileri Firebase Firestore'dan çekmek için:
-
-### 1. Firebase Projesi Oluşturun
-
-1. [Firebase Console](https://console.firebase.google.com/) 'a gidin
-2. Yeni proje oluşturun
-3. Firestore Database'i aktif edin
-
-### 2. Config Dosyası Oluşturun
-
-`firebase-config.js` dosyası oluşturun:
+`js/api.js` dosyasındaki `SHEETS_CONFIG` objesinde her sekme için CSV publish URL'leri tanımlıdır:
 
 ```javascript
-export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
+export const SHEETS_CONFIG = {
+  videolar: "https://docs.google.com/spreadsheets/d/e/.../pub?gid=0&output=csv",
+  sunucular: "https://docs.google.com/spreadsheets/d/e/.../pub?gid=...&output=csv",
+  topluEP: "https://docs.google.com/spreadsheets/d/e/.../pub?gid=...&output=csv",
+  duyurular: "https://docs.google.com/spreadsheets/d/e/.../pub?gid=...&output=csv",
 };
-```
 
-### 3. Firebase'i Aktif Edin
-
-`app.js` dosyasında:
-
-```javascript
-const USE_FIREBASE = true; // false -> true
+export const USE_SHEETS = true; // false = yalnızca statik veri
 ```
 
 ---
@@ -315,27 +294,39 @@ const USE_FIREBASE = true; // false -> true
 
 ```
 seco/
-├── index.html          # Ana HTML dosyası
-│                       # - Meta taglar, SEO
-│                       # - 3 sütun layout
-│                       # - Toplu EP modal
+├── index.html              # Ana HTML — SEO meta, yapı, CSS/JS bağlantıları
+├── app.js                  # Uygulama giriş noktası (bootstrap)
 │
-├── style.css           # Tüm stiller (~1500 satır)
-│                       # - CSS değişkenleri
-│                       # - Responsive tasarım
-│                       # - Animasyonlar
-│                       # - Glassmorphism
+├── js/
+│   ├── data.js             # Statik/fallback veri (sampleData, loadingData)
+│   ├── api.js              # Google Sheets CSV çekme, parse, URL doğrulama
+│   ├── ui.js               # DOM render fonksiyonları (profil, linkler, videolar...)
+│   └── particles.js        # Canvas ateş parçacık animasyonu
 │
-├── app.js              # JavaScript mantığı (~570 satır)
-│                       # - Veri yönetimi
-│                       # - DOM render fonksiyonları
-│                       # - Ateş animasyonu
-│                       # - Firebase entegrasyonu
+├── css/
+│   ├── variables.css       # CSS custom properties (:root değişkenleri)
+│   ├── base.css            # Reset, body, skip-link, focus, reduced-motion
+│   ├── animations.css      # Tüm @keyframes tanımları
+│   ├── layout.css          # Grid, container, sütun yapısı
+│   ├── profile.css         # Profil bölümü
+│   ├── social-links.css    # Sosyal medya bağlantı kartları
+│   ├── discord.css         # Discord wrapper stilleri
+│   ├── videos.css          # YouTube video kartları
+│   ├── servers.css         # Aktif sunucu kartları
+│   ├── duyurular.css       # Duyurular paneli
+│   ├── ep-panel.css        # Bonuslu EP inline paneli
+│   ├── toplu-ep.css        # Toplu EP butonu ve modal
+│   ├── footer.css          # Footer
+│   ├── utilities.css       # Loading, toast, Discord popup, smoke efekti
+│   └── responsive.css      # Media queries (1200px, 768px, 400px)
 │
-├── logo.jpeg           # Ana profil logosu
-├── logo2.jpeg          # Discord banner resmi
-├── README.md           # Bu dosya
-└── firebase-config.js  # (Opsiyonel) Firebase ayarları
+├── logo.jpeg               # Profil logosu
+├── dc.png                  # Discord pop-up banner görseli
+├── CNAME                   # GitHub Pages custom domain
+├── robots.txt              # Arama motoru yönergeleri
+├── sitemap.xml             # Site haritası
+├── .gitignore              # Git ignore kuralları
+└── README.md               # Bu dosya
 ```
 
 ---
@@ -346,10 +337,17 @@ seco/
 
 | Teknoloji              | Kullanım                             |
 | ---------------------- | ------------------------------------ |
-| **HTML5**              | Semantik yapı                        |
-| **CSS3**               | Stiller, animasyonlar, glassmorphism |
-| **Vanilla JavaScript** | DOM manipülasyonu, API çağrıları     |
+| **HTML5**              | Semantik yapı, ARIA erişilebilirlik  |
+| **CSS3**               | Modüler stiller, animasyonlar, glassmorphism |
+| **Vanilla JavaScript** | ES Modules, DOM manipülasyonu        |
 | **Canvas API**         | Ateş parçacık animasyonu             |
+
+### Veri Kaynağı
+
+| Kaynak                 | Kullanım                              |
+| ---------------------- | ------------------------------------- |
+| **Google Sheets CSV**  | Videolar, sunucular, EP, duyurular    |
+| **Statik JS (fallback)** | Sheets erişilemezse yedek veri      |
 
 ### API'ler
 
@@ -360,26 +358,32 @@ seco/
 
 ### Fontlar
 
-- **Cinzel** - Başlıklar (oyun teması)
-- **Poppins** - Genel metin
+- **Poppins** (Google Fonts) — 300, 400, 600, 700 ağırlıkları
 
 ### CSS Özellikleri
 
-- CSS Variables (`:root` değişkenleri)
-- Flexbox & CSS Grid
+- CSS Custom Properties (`:root` değişkenleri)
+- Flexbox & CSS Grid (4 sütun responsive)
 - `backdrop-filter: blur()` (Glassmorphism)
 - `@keyframes` animasyonları
-- Media queries (responsive)
+- Media queries (1200px, 768px, 400px breakpoint'ler)
+- `prefers-reduced-motion` desteği
 - `box-shadow` neon efektleri
 
 ### JavaScript Özellikleri
 
-- ES6+ syntax
-- Async/await
-- Fetch API
-- Template literals
+- ES6+ Modules (`import` / `export`)
+- Async/await + Promise.all
+- Fetch API + AbortController (10s timeout)
+- sessionStorage caching
 - Canvas 2D rendering
-- Event delegation
+- URL doğrulama (XSS koruması)
+
+### Güvenlik
+
+- SRI (Subresource Integrity) — FontAwesome CDN
+- `rel="noopener noreferrer"` — tüm external linkler
+- URL sanitization — Google Sheets verileri
 
 ---
 
@@ -389,10 +393,13 @@ seco/
 
 ```css
 :root {
-  --primary-yellow: #ffd700; /* Ana sarı - neon */
-  --secondary-yellow: #ffaa00; /* İkincil sarı */
-  --bg-dark: #0a0a0a; /* Arka plan */
-  --card-bg: rgba(20, 20, 20, 0.9); /* Kart arka planı */
+  --primary-yellow: #ffd700;
+  --secondary-yellow: #ffaa00;
+  --neon-glow: #ffcc00;
+  --dark-bg: #050505;
+  --card-bg: rgba(20, 20, 20, 0.6);
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
 }
 ```
 
@@ -401,36 +408,27 @@ seco/
 | Platform  | Renk       | Hex       |
 | --------- | ---------- | --------- |
 | YouTube   | 🔴 Kırmızı | `#FF0000` |
-| WhatsApp  | 🟢 Yeşil   | `#25D366` |
 | Instagram | 🟣 Pembe   | `#E4405F` |
-| Discord   | 🔵 Mavi    | `#5865F2` |
-
-### Ateş Renkleri (Animasyon)
-
-```javascript
-const colors = [
-  { r: 255, g: 215, b: 0 }, // Sarı
-  { r: 255, g: 170, b: 0 }, // Turuncu
-  { r: 255, g: 107, b: 0 }, // Koyu turuncu
-  { r: 255, g: 69, b: 0 }, // Kırmızımsı
-];
-```
+| Facebook  | 🔵 Mavi    | `#1877F2` |
+| WhatsApp  | 🟢 Yeşil   | `#25D366` |
+| Discord   | 🔵 İndigo  | `#5865F2` |
 
 ---
 
 ## 📜 Versiyon Geçmişi
 
-| Versiyon | Tarih      | Değişiklikler                           |
-| -------- | ---------- | --------------------------------------- |
-| **v1**   | -          | İlk versiyon, temel yapı                |
-| **v2**   | -          | Layout düzenlemeleri                    |
-| **v3**   | -          | Discord widget eklendi                  |
-| **v4**   | -          | YouTube videoları eklendi               |
-| **v5**   | -          | 3 sütun layout, aktif sunucular         |
-| **v6**   | -          | Discord özel kart tasarımı (banner)     |
-| **v7**   | -          | SVG logolar, Instagram eklendi          |
-| **v8**   | -          | Logo renkleri + sarı neon kutu          |
-| **v9**   | 28.12.2024 | Toplu EP sistemi, sarı-siyah tema uyumu |
+| Versiyon | Tarih      | Değişiklikler                                          |
+| -------- | ---------- | ------------------------------------------------------ |
+| **v1**   | -          | İlk versiyon, temel yapı                               |
+| **v2**   | -          | Layout düzenlemeleri                                   |
+| **v3**   | -          | Discord widget eklendi                                 |
+| **v4**   | -          | YouTube videoları eklendi                              |
+| **v5**   | -          | 3 sütun layout, aktif sunucular                        |
+| **v6**   | -          | Discord özel kart tasarımı (banner)                    |
+| **v7**   | -          | SVG logolar, Instagram eklendi                         |
+| **v8**   | -          | Logo renkleri + sarı neon kutu                         |
+| **v9**   | 28.12.2024 | Toplu EP sistemi, sarı-siyah tema uyumu                |
+| **v10**  | 09.03.2026 | Modüler CSS/JS, Google Sheets, duyurular, a11y, güvenlik |
 
 ---
 
@@ -438,21 +436,21 @@ const colors = [
 
 ### Yeni Sosyal Medya Eklemek
 
-1. `sampleData.socialLinks` dizisine yeni obje ekleyin
-2. SVG logosunu [Simple Icons](https://simpleicons.org/) 'dan alabilirsiniz
+1. `js/data.js` içindeki `sampleData.socialLinks` dizisine yeni obje ekleyin
+2. FontAwesome ikon sınıfını [FontAwesome](https://fontawesome.com/icons) 'dan bulun
 3. `order` değeri ile sıralamayı ayarlayın
 
 ### Yeni Sunucu Eklemek
 
-1. `sampleData.activeServers` dizisine yeni obje ekleyin
-2. Logo otomatik olarak Google Favicon API'den çekilir
-3. `status: "active"` yeşil nokta gösterir
+1. `js/data.js` içindeki `sampleData.activeServers` dizisine yeni obje ekleyin
+2. Veya Google Sheets'teki "sunucular" sekmesine satır ekleyin
+3. Logo otomatik olarak Google Favicon API'den çekilir
 
-### Toplu EP Kapatmak
+### Bonuslu EP Kapatmak
 
 ```javascript
 topluEP: {
-  active: false,  // Butonu ve modalı gizler
+  active: false,  // Panel "Beklemede" moduna geçer
   // ...
 }
 ```
@@ -461,15 +459,19 @@ topluEP: {
 
 - Ateş animasyonu Canvas API kullanır (GPU hızlandırmalı)
 - Parçacık sayısı optimize edilmiş (40 kıvılcım, 25 kor)
-- Lazy loading: Video başlıkları asenkron yüklenir
+- Video başlıkları sessionStorage ile cache'lenir
+- YouTube thumbnail'leri lazy loading ile yüklenir
+- CSS dosyaları paralel `<link>` etiketleriyle yüklenir (@import waterfall yok)
+- FontAwesome non-blocking yüklenir (`media="print"` + `onload`)
 
 ---
 
 ## 📝 Notlar
 
-- Tüm veriler `app.js` içindeki `sampleData` objesinden çekilir
-- Firebase entegrasyonu hazır ama varsayılan olarak kapalı (`USE_FIREBASE = false`)
-- Mobil cihazlarda 3 sütun layout tek sütuna dönüşür
+- Veriler öncelikle Google Sheets'ten çekilir, erişilemezse `js/data.js` fallback olarak kullanılır
+- `js/api.js` içinde `USE_SHEETS = false` yaparak Sheets'i devre dışı bırakabilirsiniz
+- Mobil cihazlarda 4 sütun layout tek sütuna dönüşür
+- `prefers-reduced-motion` tercihli kullanıcılarda tüm animasyonlar devre dışı kalır
 - HTTPS olmadan bazı API'ler çalışmayabilir (yerel sunucu kullanın)
 
 ---
@@ -488,7 +490,7 @@ Bu proje özel kullanım içindir. Tüm hakları saklıdır.
 
 <div align="center">
 
-**🔥 Sercio Hub v9 🔥**
+**🔥 Sercio Hub v10 🔥**
 
 _Metin2 İçerik Üreticisi_
 

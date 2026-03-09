@@ -1,4 +1,6 @@
 export function initParticles() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
   const canvas = document.getElementById("particles-canvas");
   if (!canvas) return;
 

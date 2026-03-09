@@ -54,8 +54,7 @@ async function initApp() {
         showToast("Güncel veriler alınamadı, yedek veriler gösteriliyor.", "error");
       }
     }
-  } catch (error) {
-    console.error("Uygulama başlatılırken hata:", error);
+  } catch {
     renderFallback();
     hideLoading();
     showToast("Bağlantı hatası! Çevrimdışı sürüm gösteriliyor.", "error");
