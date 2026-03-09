@@ -1,8 +1,3 @@
-// ============================================================
-// ui.js — DOM render fonksiyonları
-// ============================================================
-
-// DOM referansları
 const profileName = document.getElementById("profileName");
 const profileBio = document.getElementById("profileBio");
 const profileImage = document.getElementById("profileImage");
@@ -11,7 +6,6 @@ const serversGrid = document.getElementById("serversGrid");
 const videosGrid = document.getElementById("videosGrid");
 const loading = document.getElementById("loading");
 
-// ---- Profil ----
 export function renderProfile(profile) {
   profileName.textContent = profile.name;
   profileBio.textContent = profile.bio;
@@ -21,7 +15,6 @@ export function renderProfile(profile) {
   }
 }
 
-// ---- Sosyal Bağlantılar ----
 export function renderSocialLinks(links) {
   socialLinksContainer.innerHTML = "";
 
@@ -40,7 +33,6 @@ export function renderSocialLinks(links) {
       linkElement.style.setProperty("--link-color", link.color);
     }
 
-    // İkon — FontAwesome class kullanılır
     const iconDiv = document.createElement("div");
     iconDiv.className = "social-icon";
     if (link.icon) {
@@ -76,25 +68,36 @@ export function renderSocialLinks(links) {
   });
 }
 
-// ---- Video Başlığı Çek ----
 async function fetchVideoTitle(videoId) {
+  const cacheKey = `vt_${videoId}`;
+  try {
+    const cached = sessionStorage.getItem(cacheKey);
+    if (cached) return cached;
+  } catch {
+    /* sessionStorage erişilemez */
+  }
+
   try {
     const response = await fetch(
       `https://noembed.com/embed?url=https://www.youtube.com/watch?v=${videoId}`,
     );
     const data = await response.json();
-    return data.title || "Video";
+    const title = data.title || "Video";
+    try {
+      sessionStorage.setItem(cacheKey, title);
+    } catch {
+      /* quota */
+    }
+    return title;
   } catch (error) {
     console.error("Video başlığı alınamadı:", error);
     return "Video";
   }
 }
 
-// ---- Videolar ----
 export async function renderVideos(videoIds) {
   videosGrid.innerHTML = "";
 
-  // Tüm kartları önce DOM'a ekle
   const cards = videoIds.map((videoId) => {
     const card = document.createElement("a");
     card.href = `https://www.youtube.com/watch?v=${videoId}`;
@@ -107,7 +110,7 @@ export async function renderVideos(videoIds) {
 
     const img = document.createElement("img");
     img.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-    img.alt = "Video thumbnail";
+    img.alt = "Video küçük resmi";
 
     const playBtn = document.createElement("div");
     playBtn.className = "video-play-btn";
@@ -132,14 +135,14 @@ export async function renderVideos(videoIds) {
     return { card, titleH4 };
   });
 
-  // Tüm başlıkları paralel çek
   const titles = await Promise.all(videoIds.map(fetchVideoTitle));
   titles.forEach((title, i) => {
     cards[i].titleH4.textContent = title;
+    const img = cards[i].card.querySelector(".video-thumbnail img");
+    if (img) img.alt = `${title} - YouTube video küçük resmi`;
   });
 }
 
-// ---- Sunucular ----
 export function renderServers(servers) {
   serversGrid.innerHTML = "";
 
@@ -158,16 +161,14 @@ export function renderServers(servers) {
       console.warn("URL parse error:", server.url);
     }
 
-    // Logo bölümü
     const logoDiv = document.createElement("div");
     logoDiv.className = "server-logo";
 
     if (server.logo || faviconUrl) {
       const img = document.createElement("img");
       img.src = server.logo || faviconUrl;
-      img.alt = server.name; // güvenli textContent yerine alt (görsel metin)
+      img.alt = server.name;
       if (!server.logo && faviconUrl) {
-        // Favicon yüklenemezse emoji ikonuna geç
         const iconSpan = document.createElement("span");
         iconSpan.className = "server-icon";
         iconSpan.textContent = server.icon || "🎮";
@@ -179,7 +180,6 @@ export function renderServers(servers) {
         logoDiv.appendChild(img);
         logoDiv.appendChild(iconSpan);
       } else {
-        // Logo varsa favicon fallback
         img.addEventListener("error", () => {
           img.src = faviconUrl;
         });
@@ -196,7 +196,6 @@ export function renderServers(servers) {
     statusDiv.className = `server-status ${server.status}`;
     logoDiv.appendChild(statusDiv);
 
-    // Bilgi bölümü
     const infoDiv = document.createElement("div");
     infoDiv.className = "server-info";
 
@@ -211,7 +210,6 @@ export function renderServers(servers) {
   });
 }
 
-// ---- Toplu EP Paneli ----
 export function renderTopluEP(topluEP) {
   const panel = document.getElementById("bonusluEpPanel");
   const panelContent = document.getElementById("epPanelContent");
@@ -253,7 +251,6 @@ export function renderTopluEP(topluEP) {
     return;
   }
 
-  // Aktif durum
   if (panel) panel.classList.remove("inactive");
   if (panelIcon) panelIcon.textContent = "🔥";
   if (liveBadge) {
@@ -302,7 +299,6 @@ export function renderTopluEP(topluEP) {
   }
 }
 
-// ---- Duyurular ----
 export function renderDuyurular(duyurular) {
   const duyurularList = document.getElementById("duyurularList");
   if (!duyurularList) return;
@@ -334,7 +330,6 @@ export function renderDuyurular(duyurular) {
     const item = document.createElement("div");
     item.className = `duyuru-item ${tip}`;
 
-    // Sol kısım: badge + tarih
     const leftDiv = document.createElement("div");
     leftDiv.className = "duyuru-left";
 
@@ -349,7 +344,6 @@ export function renderDuyurular(duyurular) {
     leftDiv.appendChild(badge);
     leftDiv.appendChild(tarih);
 
-    // Sağ kısım: mesaj + saat + link butonu
     const contentDiv = document.createElement("div");
     contentDiv.className = "duyuru-content";
 
@@ -383,7 +377,6 @@ export function renderDuyurular(duyurular) {
   });
 }
 
-// ---- Yardımcı Fonksiyonlar ----
 function getDuyuruTipConfig(tip) {
   const configs = {
     normal: { badge: "📢", buttonText: "" },
@@ -404,7 +397,6 @@ function formatDuyuruTarih(tarih) {
   return tarih;
 }
 
-// ---- Toast Bildirim (Hata / Bilgi) ----
 export function showToast(message, type = "error") {
   const existingToast = document.querySelector(".toast-notification");
   if (existingToast) existingToast.remove();
@@ -415,13 +407,11 @@ export function showToast(message, type = "error") {
 
   document.body.appendChild(toast);
 
-  // Kısa bir süre sonra görünür yap (CSS transition için)
   setTimeout(() => toast.classList.add("show"), 10);
 
-  // 3.5 saniye sonra kapat
   setTimeout(() => {
     toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 300); // 300ms CSS fade-out transition
+    setTimeout(() => toast.remove(), 300);
   }, 3500);
 }
 

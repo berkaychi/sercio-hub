@@ -1,113 +1,222 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Metin2 content creator Sercio'nun tüm sosyal medya bağlantıları, videolar ve canlı sunucu bilgileri."
+    />
+    <meta name="theme-color" content="#ffd700" />
+    <title>Sercio - Sosyal Hub</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Sercio Sosyal Hub - Tüm bağlantılarımı keşfedin" />
-  <title>Sercio - Sosyal Hub</title>
-  <link rel="icon" type="image/jpeg" href="logo.jpeg" />
-  <!-- FontAwesome for Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-</head>
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sercio.com.tr/" />
 
-<body>
-  <!-- Particles Canvas -->
-  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sercio - Sosyal Hub" />
+    <meta
+      property="og:description"
+      content="Metin2 content creator Sercio'nun tüm sosyal medya bağlantıları, videolar ve canlı sunucu bilgileri."
+    />
+    <meta property="og:url" content="https://sercio.com.tr/" />
+    <meta property="og:image" content="https://sercio.com.tr/logo.jpeg" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="Sercio" />
 
-  <!-- Smoke/Mist Effect -->
-  <div class="smoke-container" aria-hidden="true">
-    <div class="smoke smoke-1"></div>
-    <div class="smoke smoke-2"></div>
-    <div class="smoke smoke-3"></div>
-  </div>
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sercio - Sosyal Hub" />
+    <meta
+      name="twitter:description"
+      content="Metin2 content creator Sercio'nun tüm sosyal medya bağlantıları, videolar ve canlı sunucu bilgileri."
+    />
+    <meta name="twitter:image" content="https://sercio.com.tr/logo.jpeg" />
 
-  <!-- Background Animation -->
-  <div class="background-animation" aria-hidden="true"></div>
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Sercio",
+          "url": "https://sercio.com.tr",
+          "image": "https://sercio.com.tr/logo.jpeg",
+          "description": "Metin2 content creator",
+          "sameAs": [
+            "https://www.youtube.com/@Sercio-m4d",
+            "https://www.instagram.com/sserciiomt2/",
+            "https://discord.gg/sercio"
+          ]
+        }
+      }
+    </script>
 
-  <div class="container">
-    <!-- Profil Bölümü -->
-    <header class="profile-section">
-      <div class="profile-image">
-        <img id="profileImage" src="" alt="Sercio profil fotoğrafı" onerror="this.style.display='none'" />
-        <div class="profile-ring" aria-hidden="true"></div>
-      </div>
-      <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
-      <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
-    </header>
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="logo.jpeg" />
+    <link rel="apple-touch-icon" href="logo.jpeg" />
 
-    <!-- Ana İçerik Alanı - 3 Kolon -->
-    <main class="main-content">
-      <!-- Sol Kolon - Bonuslu EP -->
-      <section class="column discord-column" aria-label="Bonuslu EP Paneli">
-        <div class="bonuslu-ep-panel" id="bonusluEpPanel" style="display: none">
-          <div class="ep-panel-header">
-            <span class="ep-panel-icon" id="epPanelIcon" aria-hidden="true">🔥</span>
-            <h2>BONUSLU EP ÇEKİMİ</h2>
-            <span class="ep-live-badge" id="epLiveBadge">AKTİF</span>
-          </div>
-          <div class="ep-panel-content" id="epPanelContent">
-            <!-- İçerik dinamik olarak yüklenir -->
-          </div>
+    <!-- FontAwesome -->
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    /></noscript>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Skip to content -->
+    <a href="#main-content" class="skip-link">İçeriğe geç</a>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+    <!-- Smoke/Mist Effect -->
+    <div class="smoke-container" aria-hidden="true">
+      <div class="smoke smoke-1"></div>
+      <div class="smoke smoke-2"></div>
+      <div class="smoke smoke-3"></div>
+    </div>
+
+    <!-- Background Animation -->
+    <div class="background-animation" aria-hidden="true"></div>
+
+    <div class="container">
+      <!-- Profil Bölümü -->
+      <header class="profile-section">
+        <div class="profile-image">
+          <img
+            id="profileImage"
+            src=""
+            alt="Sercio profil fotoğrafı"
+            onerror="this.style.display = 'none'"
+          />
+          <div class="profile-ring" aria-hidden="true"></div>
         </div>
-      </section>
+        <h1 class="profile-name" id="profileName">Yükleniyor...</h1>
+        <p class="profile-bio" id="profileBio">Bizi Takip Edin</p>
+      </header>
 
-      <!-- Orta Kolon - Bağlantılar -->
-      <section class="column center-column" aria-label="Sosyal Medya Bağlantıları">
-        <div class="social-links-wrapper">
-          <h2 class="section-title">🔗 Bağlantılar</h2>
-          <nav class="social-links" id="socialLinks" aria-label="Sosyal medya bağlantıları">
-            <!-- Bağlantılar dinamik olarak yüklenir -->
-          </nav>
+      <!-- Ana İçerik Alanı -->
+      <main id="main-content">
+        <div class="main-content-grid">
+          <!-- Sol Kolon - Bonuslu EP -->
+          <section class="column discord-column" aria-label="Bonuslu EP Paneli">
+            <div
+              class="bonuslu-ep-panel"
+              id="bonusluEpPanel"
+              style="display: none"
+            >
+              <div class="ep-panel-header">
+                <span class="ep-panel-icon" id="epPanelIcon" aria-hidden="true"
+                  >🔥</span
+                >
+                <h2>BONUSLU EP ÇEKİMİ</h2>
+                <span class="ep-live-badge" id="epLiveBadge">AKTİF</span>
+              </div>
+              <div class="ep-panel-content" id="epPanelContent">
+                <!-- İçerik dinamik olarak yüklenir -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Orta Kolon - Bağlantılar -->
+          <section
+            class="column center-column"
+            aria-label="Sosyal Medya Bağlantıları"
+          >
+            <div class="social-links-wrapper">
+              <h2 class="section-title">🔗 Bağlantılar</h2>
+              <nav
+                class="social-links"
+                id="socialLinks"
+                aria-label="Sosyal medya bağlantıları"
+              >
+                <!-- Bağlantılar dinamik olarak yüklenir -->
+              </nav>
+            </div>
+          </section>
+
+          <!-- 3. Kolon - Duyurular -->
+          <aside class="column duyurular-column" aria-label="Duyurular">
+            <section class="duyurular-panel" aria-label="Duyurular">
+              <h2 class="section-title">📢 Duyurular</h2>
+              <div class="duyurular-list" id="duyurularList">
+                <!-- Duyurular dinamik olarak yüklenir -->
+              </div>
+            </section>
+          </aside>
+
+          <!-- 4. Kolon - Aktif Sunucular -->
+          <section class="column servers-column" aria-label="Aktif Sunucular">
+            <div class="servers-wrapper">
+              <h2 class="section-title">🎮 Aktif Oynadığımız Sunucular</h2>
+              <div class="servers-grid" id="serversGrid">
+                <!-- Sunucular dinamik olarak yüklenir -->
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
 
-      <!-- 3. Kolon - Duyurular -->
-      <aside class="column duyurular-column" aria-label="Duyurular">
-        <section class="duyurular-panel" aria-label="Duyurular">
-          <h2 class="section-title">📢 Duyurular</h2>
-          <div class="duyurular-list" id="duyurularList">
-            <!-- Duyurular dinamik olarak yüklenir -->
+        <!-- Alt: YouTube Videoları -->
+        <section class="youtube-section" aria-label="Son Videolar">
+          <h2 class="section-title">📺 Son Videolarım</h2>
+          <div class="videos-grid" id="videosGrid">
+            <!-- Videolar dinamik olarak yüklenir -->
           </div>
         </section>
-      </aside>
+      </main>
 
-      <!-- 4. Kolon - Aktif Sunucular -->
-      <section class="column servers-column" aria-label="Aktif Sunucular">
-        <div class="servers-wrapper">
-          <h2 class="section-title">🎮 Aktif Oynadığımız Sunucular</h2>
-          <div class="servers-grid" id="serversGrid">
-            <!-- Sunucular dinamik olarak yüklenir -->
-          </div>
-        </div>
-      </section>
-    </main>
+      <footer class="footer">
+        <p>&copy; 2026 Sercio. Tüm hakları saklıdır.</p>
+      </footer>
+    </div>
 
-    <!-- Alt: YouTube Videoları -->
-    <section class="youtube-section" aria-label="Son Videolar">
-      <h2 class="section-title">📺 Son Videolarım</h2>
-      <div class="videos-grid" id="videosGrid">
-        <!-- Videolar dinamik olarak yüklenir -->
-      </div>
-    </section>
-  </div>
+    <!-- Discord Pop-up Banner -->
+    <a
+      href="https://discord.gg/sercio"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="discord-popup"
+      id="discordPopup"
+      aria-label="Sercio Discord sunucusuna katıl"
+    >
+      <img
+        src="dc.png"
+        alt="Sercio Discord sunucusuna katıl"
+        class="discord-popup-img"
+      />
+    </a>
 
-  <!-- Discord Pop-up Banner -->
-  <a href="https://discord.gg/sercio" target="_blank" rel="noopener noreferrer" class="discord-popup" id="discordPopup"
-    aria-label="Sercio Discord sunucusuna katıl">
-    <img src="dc.png" alt="Sercio Discord sunucusuna katıl" class="discord-popup-img" />
-  </a>
+    <!-- Loading Spinner -->
+    <div
+      class="loading"
+      id="loading"
+      role="status"
+      aria-label="İçerik yükleniyor"
+    >
+      <div class="spinner"></div>
+    </div>
 
-  <!-- Loading Spinner -->
-  <div class="loading" id="loading" role="status" aria-label="İçerik yükleniyor">
-    <div class="spinner"></div>
-  </div>
-
-  <script type="module" src="app.js"></script>
-</body>
-
+    <script type="module" src="app.js"></script>
+  </body>
 </html>

@@ -1,7 +1,3 @@
-// ============================================================
-// data.js — Statik fallback veriler ve ikon SVG'leri
-// ============================================================
-
 export const loadingData = {
   youtubeVideos: [],
   activeServers: [

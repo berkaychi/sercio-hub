@@ -10,10 +10,12 @@
   padding: 25px 30px 30px;
   position: relative;
   z-index: 1;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Main Content - 4 Column Grid Layout */
-.main-content {
+.main-content-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: start;
