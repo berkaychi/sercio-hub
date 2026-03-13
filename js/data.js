@@ -13,7 +13,7 @@ export const sampleData = {
   profile: {
     name: "Sercio",
     bio: "Bizi Takip Edin",
-    image: "logo.jpeg",
+    image: "images/logo.jpeg",
   },
   socialLinks: [
     {

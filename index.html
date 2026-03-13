@@ -57,8 +57,8 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/jpeg" href="logo.jpeg" />
-    <link rel="apple-touch-icon" href="logo.jpeg" />
+    <link rel="icon" type="image/jpeg" href="images/logo.jpeg" />
+    <link rel="apple-touch-icon" href="images/logo.jpeg" />
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -106,12 +106,17 @@
     />
 
     <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J0PXF81T46"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-J0PXF81T46"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-J0PXF81T46');
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-J0PXF81T46");
     </script>
   </head>
 
@@ -232,6 +237,20 @@
       </footer>
     </div>
 
+    <!-- Etkinlik Pop-up -->
+    <div class="etkinlik-overlay" id="etkinlikOverlay" role="dialog" aria-modal="true" aria-label="Etkinlik duyurusu">
+      <div class="etkinlik-popup">
+        <button class="etkinlik-close-btn" id="etkinlikCloseBtn" aria-label="Kapat">&times;</button>
+        <a href="https://m2shin.com" target="_blank" rel="noopener noreferrer">
+          <img
+            src="images/etkinlik.png"
+            alt="Etkinlik duyurusu - m2shin.com"
+            class="etkinlik-popup-img"
+          />
+        </a>
+      </div>
+    </div>
+
     <!-- Discord Pop-up Banner -->
     <a
       href="https://discord.gg/sercio"
@@ -242,7 +261,7 @@
       aria-label="Sercio Discord sunucusuna katıl"
     >
       <img
-        src="dc.png"
+        src="images/dc.png"
         alt="Sercio Discord sunucusuna katıl"
         class="discord-popup-img"
         width="320"
