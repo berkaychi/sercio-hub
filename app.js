@@ -61,34 +61,9 @@ async function initApp() {
   }
 }
 
-function initEtkinlikPopup() {
-  const overlay = document.getElementById("etkinlikOverlay");
-  const closeBtn = document.getElementById("etkinlikCloseBtn");
-  if (!overlay || !closeBtn) return;
 
-  if (sessionStorage.getItem("etkinlikClosed")) return;
-
-  requestAnimationFrame(() => overlay.classList.add("active"));
-
-  function closePopup() {
-    overlay.classList.add("closing");
-    overlay.classList.remove("active");
-    sessionStorage.setItem("etkinlikClosed", "true");
-    overlay.addEventListener("transitionend", () => overlay.remove(), { once: true });
-  }
-
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    closePopup();
-  });
-
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closePopup();
-  });
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
   initParticles();
-  initEtkinlikPopup();
 });

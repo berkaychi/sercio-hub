@@ -427,7 +427,7 @@ seco/
 | **v6**   | -          | Discord özel kart tasarımı (banner)                    |
 | **v7**   | -          | SVG logolar, Instagram eklendi                         |
 | **v8**   | -          | Logo renkleri + sarı neon kutu                         |
-| **v9**   | 28.12.2024 | Toplu EP sistemi, sarı-siyah tema uyumu                |
+| **v9**   | 28.12.2026 | Toplu EP sistemi, sarı-siyah tema uyumu                |
 | **v10**  | 09.03.2026 | Modüler CSS/JS, Google Sheets, duyurular, a11y, güvenlik |
 
 ---
